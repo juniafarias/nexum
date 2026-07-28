@@ -1,0 +1,384 @@
+/* ===================================================
+   VARIÁVEIS E BASE
+   =================================================== */
+:root {
+  --bg: #131619;
+  --card-bg: #16191c;
+  --input-bg: #1c2023;
+  --border: #2a2f33;
+  --green: #2ee8a4;
+  --green-dark: #16241d;
+  --text: #f2f2f2;
+  --text-muted: #9aa0a6;
+  --red: #ff5c5c;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--bg);
+  font-family: 'Segoe UI', Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 15px;
+}
+
+/* ===================================================
+   CARD PRINCIPAL
+   =================================================== */
+.card {
+  width: 100%;
+  max-width: 640px;
+  background: var(--card-bg);
+  border: 1px solid var(--green);
+  border-radius: 24px;
+  padding: 40px 50px 50px;
+  box-shadow: 0 0 40px rgba(46, 232, 164, 0.08);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.logo {
+  height: 100px;
+  width: auto;
+  object-fit: contain;
+  margin-left: -45px; /* Puxa a logo para a esquerda para alinhar com a bordinha */
+  margin-top: -45px;   /* Compensa a altura extra para não expandir o card */
+  margin-bottom: -45px; /* Compensa a altura extra para não expandir o card */
+}
+
+.login-link {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin: 0;
+}
+
+.login-link a {
+  color: var(--green);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.login-link a:hover { text-decoration: underline; }
+
+.title-center {
+  text-align: center;
+  color: var(--text);
+  font-size: 28px;
+  margin: 10px 0 8px;
+}
+
+/* ===================================================
+   UPLOAD DE FOTO
+   =================================================== */
+.photo-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.photo-circle {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  background-size: cover;
+  background-position: center;
+  transition: 0.3s;
+}
+
+.photo-circle i {
+  font-size: 26px;
+  color: var(--green);
+}
+
+.photo-remove {
+  display: none;
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  width: 26px;
+  height: 26px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--red);
+  border: 2px solid var(--card-bg);
+  color: #fff;
+  font-size: 11px;
+  padding: 0;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.photo-remove:hover {
+  background: #e14a4a;
+}
+
+.photo-circle.has-image .photo-remove {
+  display: flex;
+}
+
+.photo-label {
+  margin-top: 10px;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.photo-label:hover {
+  color: var(--green);
+  text-decoration: underline;
+}
+
+/* ===================================================
+   CAMPOS DE ENTRADA
+   =================================================== */
+.input-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-group label {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.wrapper-input {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+input {
+  width: 100%;
+  padding: 14px 45px 14px 15px;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+  color: var(--text);
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+input::placeholder { color: #6b7176; }
+
+input:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 8px rgba(46, 232, 164, 0.35);
+}
+
+input.input-invalid { border-color: var(--red); }
+input.input-invalid:focus { box-shadow: 0 0 8px rgba(255, 92, 92, 0.35); }
+
+input.input-valid { border-color: var(--green); }
+
+.input-icon, .toggle-password {
+  position: absolute;
+  right: 15px;
+  color: var(--text-muted);
+  font-size: 16px;
+  pointer-events: none;
+}
+
+.toggle-password {
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.helper-text {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.error-message {
+  color: var(--red);
+  font-size: 12px;
+  min-height: 14px;
+}
+
+/* ===================================================
+   REGRAS DE SENHA
+   =================================================== */
+.password-rules {
+  margin-top: 8px;
+  padding: 12px 15px;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.rules-title {
+  color: var(--green);
+  font-weight: 600;
+  font-size: 13px;
+  margin: 0 0 8px;
+}
+
+#rules-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#rules-list li {
+  font-size: 13px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: 0.2s;
+}
+
+#rules-list li i {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+#rules-list li.rule-ok {
+  color: var(--text);
+}
+
+#rules-list li.rule-ok i {
+  color: var(--green);
+}
+
+/* ===================================================
+   BOTÃO
+   =================================================== */
+#botaoCriar {
+  width: 100%;
+  padding: 16px;
+  margin-top: 10px;
+  background-color: #3a4038;
+  color: #8b9089;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: not-allowed;
+  transition: 0.3s;
+}
+
+#botaoCriar.valid-btn {
+  background-color: var(--green);
+  color: #06251b;
+  cursor: pointer;
+}
+
+#botaoCriar.valid-btn:hover {
+  background-color: #26cf90;
+}
+
+.botao-wrapper {
+  position: relative;
+}
+
+.botao-tooltip {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  max-width: 90vw;
+  background: var(--input-bg);
+  border: 1px solid var(--red);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  z-index: 10;
+}
+
+.botao-tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent var(--red) transparent;
+}
+
+.botao-tooltip.show {
+  display: block;
+}
+
+/* ===================================================
+   POP-UP DE SUCESSO
+   =================================================== */
+.popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background: var(--card-bg);
+  border: 1px solid var(--green);
+  padding: 35px;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 320px;
+  color: var(--text);
+}
+
+.popup-content i {
+  font-size: 3rem;
+  color: var(--green);
+  margin-bottom: 15px;
+}
+
+.popup-content button {
+  margin-top: 15px;
+  padding: 10px 25px;
+  background: var(--green);
+  color: #06251b;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ===================================================
+   RESPONSIVIDADE
+   =================================================== */
+@media (max-width: 480px) {
+  .card { padding: 30px 22px 40px; }
+  .card-header { flex-direction: column; gap: 10px; text-align: center; }
+  .logo { margin: 0; }
+}

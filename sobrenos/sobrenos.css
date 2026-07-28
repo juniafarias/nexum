@@ -1,0 +1,96 @@
+/* ===================================================
+   PÁGINA SOBRE NÓS — hero de tela cheia com foto de
+   fundo e conteúdo posicionado nos cantos, igual ao
+   protótipo enviado
+   =================================================== */
+
+.sobre-hero {
+  position: relative;
+  min-height: calc(100vh - 60px); /* desconta a altura do header fixo */
+  background-image: url("../img/sobrenosfundo.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 50px 60px;
+}
+
+/* leve escurecida por cima da foto para o texto ficar sempre legível */
+.sobre-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(5,6,7,0.55) 0%, rgba(5,6,7,0.05) 25%, rgba(5,6,7,0.05) 70%, rgba(5,6,7,0.6) 100%);
+  pointer-events: none;
+}
+
+.sobre-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Frase no canto superior esquerdo --- */
+.sobre-hero__topleft {
+  max-width: 480px;
+}
+
+.sobre-hero__topleft p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #f2fbf7;
+  font-weight: 500;
+}
+
+.sobre-hero__topleft .wave {
+  display: inline-block;
+}
+
+/* --- Ícones sociais centralizados --- */
+.sobre-hero__center {
+  align-self: center;
+  display: flex;
+  gap: 20px;
+}
+
+.social-circle {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1.5px solid #f2fbf7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f2fbf7;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.social-circle svg {
+  width: 20px;
+  height: 20px;
+}
+
+.social-circle:hover {
+  background: var(--green);
+  border-color: var(--green);
+  color: #000;
+  transform: translateY(-3px);
+}
+
+/* --- Nome no canto inferior esquerdo --- */
+.sobre-hero__bottomleft p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #f2fbf7;
+}
+
+/* --- Responsividade --- */
+@media (max-width: 700px) {
+  .sobre-hero {
+    padding: 30px 24px;
+    min-height: 80vh;
+  }
+  .sobre-hero__topleft p { font-size: 0.95rem; }
+  .sobre-hero__center { gap: 14px; }
+}

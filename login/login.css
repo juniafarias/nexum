@@ -1,0 +1,331 @@
+/* ===================================================
+   VARIÁVEIS E BASE
+   (mesmas variáveis de cor usadas na tela de cadastro,
+   para manter a identidade visual da Nexum em todo o site)
+   =================================================== */
+:root {
+  --bg: #131619;         /* cor de fundo da página (bem escura) */
+  --card-bg: #16191c;      /* cor de fundo do cartão de login */
+  --input-bg: #1c2023;     /* cor de fundo dos campos de input */
+  --border: #2a2f33;       /* cor da borda padrão (campo neutro) */
+  --green: #2ee8a4;        /* verde principal da marca Nexum */
+  --green-dark: #16241d;
+  --text: #f2f2f2;         /* cor do texto principal (quase branco) */
+  --text-muted: #9aa0a6;   /* cor do texto secundário (cinza) */
+  --red: #ff5c5c;          /* cor usada para indicar erro */
+}
+
+/* Faz com que padding e border entrem no cálculo de largura/altura de todo elemento,
+   evitando que o card "estoure" o layout */
+* { box-sizing: border-box; }
+
+/* ===================================================
+   CORPO DA PÁGINA
+   =================================================== */
+body {
+  margin: 0;                    /* remove a margem padrão do navegador */
+  min-height: 100vh;            /* ocupa no mínimo a altura inteira da tela */
+  background-color: var(--bg);   /* aplica o fundo escuro */
+  font-family: 'Segoe UI', Arial, sans-serif; /* mesma fonte usada no cadastro */
+  display: flex;                /* usa flexbox para centralizar o card */
+  justify-content: center;      /* centraliza horizontalmente */
+  align-items: center;          /* centraliza verticalmente */
+  padding: 40px 15px;           /* respiro nas bordas em telas pequenas */
+}
+
+/* ===================================================
+   CARTÃO PRINCIPAL (o "quadrado" com borda verde da imagem)
+   =================================================== */
+.card {
+  width: 100%;                  /* ocupa toda a largura disponível... */
+  max-width: 500px;             /* ...até um limite máximo (card não fica gigante em telas largas) */
+  background: var(--card-bg);   /* fundo escuro do card */
+  border: 1px solid var(--green); /* borda fina verde, igual à da imagem */
+  border-radius: 24px;         /* cantos bem arredondados */
+  padding: 40px 45px 45px;     /* espaçamento interno do card */
+  /* leve brilho esverdeado ao redor do card, dando profundidade */
+  box-shadow: 0 0 40px rgba(46, 232, 164, 0.08);
+}
+
+/* Cabeçalho do card: logo de um lado, link de cadastro do outro */
+.card-header {
+  display: flex;                /* logo e link lado a lado */
+  justify-content: space-between; /* um em cada extremidade */
+  align-items: center;          /* alinhados verticalmente ao centro */
+  margin-bottom: 10px;          /* espaço antes do título */
+}
+
+/* Logo da Nexum no topo do card */
+.logo {
+  height: 100px;           /* altura da logo (menor que no cadastro, pois o card de login é mais compacto) */
+  width: auto;            /* largura proporcional automática */
+  object-fit: contain;    /* garante que a imagem não distorça */
+  margin-left: -40px;     /* puxa a logo para a esquerda, alinhando com a borda do card */
+  margin-top: -40px;      /* compensa a altura extra da imagem sem esticar o card */
+  margin-bottom: -40px;   /* idem, para não empurrar o conteúdo abaixo */
+}
+
+/* Texto "Já não tem uma conta? Criar conta" */
+.cadastro-link {
+  color: var(--text-muted); /* texto em cinza claro */
+  font-size: 14px;
+  margin: 0;                /* remove margens padrão do parágrafo */
+  text-align: right;        /* alinha à direita, como na imagem */
+}
+
+/* O link "Criar conta" dentro do parágrafo acima */
+.cadastro-link a {
+  color: var(--green);   /* destaque em verde */
+  font-weight: bold;     /* negrito para chamar atenção */
+  text-decoration: none; /* remove o sublinhado padrão de link */
+}
+
+/* Sublinha o link "Criar conta" apenas quando o mouse passa por cima */
+.cadastro-link a:hover { text-decoration: underline; }
+
+/* Título "Bem-vindo de volta!" */
+.title-center {
+  text-align: center;   /* centralizado, como na imagem */
+  color: var(--text);   /* branco */
+  font-size: 30px;
+  font-weight: 800;      /* bem grosso, igual ao peso visto na imagem */
+  margin: 30px 0 6px;    /* espaço acima (afasta do cabeçalho) e abaixo (aproxima do subtítulo) */
+}
+
+/* Subtítulo "Faça login para acessar sua conta." */
+.subtitle-center {
+  text-align: center;
+  color: var(--text-muted); /* cinza, texto secundário */
+  font-size: 15px;
+  margin: 0 0 35px;         /* espaço grande abaixo, separando do formulário */
+}
+
+/* ===================================================
+   CAMPOS DE ENTRADA (Email e Senha)
+   =================================================== */
+
+/* Bloco que agrupa label + input + mensagem de erro de cada campo */
+.input-group {
+  margin-bottom: 22px;    /* espaço entre um campo e outro */
+  display: flex;
+  flex-direction: column; /* label em cima, input embaixo */
+  gap: 8px;               /* espaço entre o label e o input */
+}
+
+/* Texto do label (ex: "Email", "Senha") */
+.input-group label {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Container relativo que envolve o input e o ícone,
+   permitindo posicionar o ícone dentro do campo */
+.wrapper-input {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* Estilo de todos os campos de texto do formulário */
+input {
+  width: 100%;
+  padding: 14px 45px 14px 15px; /* espaço extra à direita para não sobrepor o ícone */
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;         /* remove o contorno azul padrão do navegador ao focar */
+  color: var(--text);
+  font-size: 15px;
+  transition: 0.3s;      /* transição suave ao mudar de cor/sombra */
+}
+
+/* Cor do texto de exemplo (placeholder) dentro do input */
+input::placeholder { color: #6b7176; }
+
+/* Quando o usuário clica/foca no campo */
+input:focus {
+  border-color: var(--green);                    /* borda fica verde */
+  box-shadow: 0 0 8px rgba(46, 232, 164, 0.35);      /* brilho verde suave */
+}
+
+/* Quando o JavaScript marca o campo como inválido */
+input.input-invalid { border-color: var(--red); }
+input.input-invalid:focus { box-shadow: 0 0 8px rgba(255, 92, 92, 0.35); }
+
+/* Quando o JavaScript marca o campo como válido */
+input.input-valid { border-color: var(--green); }
+
+/* Ícones dentro dos campos (envelope do email / olho da senha) */
+.input-icon, .toggle-password {
+  position: absolute;     /* posicionado sobre o input */
+  right: 15px;            /* colado à direita, dentro do campo */
+  color: var(--text-muted);
+  font-size: 16px;
+  pointer-events: none;   /* por padrão, o ícone não é clicável (caso do envelope) */
+}
+
+/* O ícone de olho (senha) precisa ser clicável, então reativamos os cliques nele */
+.toggle-password {
+  cursor: pointer;
+  pointer-events: all;
+}
+
+/* Mensagem de erro que aparece abaixo do campo quando algo está errado */
+.error-message {
+  color: var(--red);
+  font-size: 12px;
+  min-height: 14px; /* reserva o espaço mesmo sem texto, evitando "pulos" no layout */
+}
+
+/* ===================================================
+   BOTÃO "ENTRAR" E TOOLTIP (PADRONIZADO COM O CADASTRO)
+   =================================================== */
+.botao-wrapper {
+  margin-top: 15px;  /* respiro entre o campo de senha e o botão */
+  position: relative; /* necessário para posicionar o tooltip logo abaixo */
+}
+
+#botaoEntrar {
+  width: 100%;
+  padding: 16px;
+  background-color: #3a4038; /* mesma cor inicial desativada do cadastro */
+  color: #8b9089;            /* texto mais apagado */
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: not-allowed;       /* cursor de bloqueado */
+  transition: 0.3s;
+}
+
+/* Quando o formulário estiver preenchido corretamente, o JS adiciona esta classe */
+#botaoEntrar.valid-btn {
+  background-color: var(--green);
+  color: #06251b;
+  cursor: pointer;
+}
+
+#botaoEntrar.valid-btn:hover {
+  background-color: #26cf90;
+}
+
+/* Tooltip / Balão de aviso abaixo do botão (idêntico ao da tela de cadastro) */
+.botao-tooltip {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  max-width: 90vw;
+  background: var(--input-bg);
+  border: 1px solid var(--red);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  z-index: 10;
+}
+
+.botao-tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent var(--red) transparent;
+}
+
+.botao-tooltip.show {
+  display: block;
+}
+
+/* Quando o formulário está inválido e o usuário tenta enviar mesmo assim,
+   o JavaScript adiciona esta classe para "chacoalhar" o card e chamar atenção */
+.shake {
+  animation: shake 0.35s;
+}
+
+/* Animação de "balançar" (pequeno deslocamento horizontal) */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+/* ===================================================
+   POP-UP (Sucesso / Erro) (PADRONIZADO COM O CADASTRO)
+   =================================================== */
+.popup-overlay {
+  display: none;                 /* fica escondido até ser acionado */
+  position: fixed;               /* cobre a tela inteira, por cima de tudo */
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);   /* fundo escurecido da tela de cadastro */
+  z-index: 1000;                 /* garante que fique acima de todo o resto */
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background: var(--card-bg);
+  border: 1px solid var(--green); /* borda verde padrão da cadastro */
+  padding: 35px;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 320px;
+  width: 100%;
+  color: var(--text);
+}
+
+.popup-content i {
+  font-size: 3rem;
+  color: var(--green);
+  margin-bottom: 15px;
+}
+
+.popup-content h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.popup-content p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.popup-content button {
+  margin-top: 15px;
+  padding: 10px 25px;
+  background: var(--green);
+  color: #06251b;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.popup-content button:hover {
+  background: #26cf90;
+}
+
+/* ===================================================
+   RESPONSIVIDADE (telas pequenas / celulares)
+   =================================================== */
+@media (max-width: 480px) {
+  .card { padding: 30px 22px 40px; }              /* menos espaçamento interno */
+  .card-header { flex-direction: column; gap: 10px; text-align: center; } /* logo e link empilhados */
+  .cadastro-link { text-align: center; }            /* centraliza o link em telas pequenas */
+  .logo { margin: 0; }                            /* remove as margens negativas nesse caso */
+}

@@ -1,0 +1,258 @@
+/* Seção principal (hero) da página de suporte */
+.suporte-hero {
+  padding: 120px 0 80px; /* Espaçamento interno: mais no topo (por causa do header fixo) e menos embaixo */
+  background-image: url("../img/suportefundo.png"); /* Imagem de fundo da seção */
+  background-size: cover; /* Faz a imagem cobrir toda a área sem distorcer */
+  background-position: center; /* Centraliza a imagem de fundo */
+  background-repeat: no-repeat; /* Evita repetir a imagem */
+  position: relative; /* Necessário para o z-index do container funcionar corretamente */
+}
+
+/* Container dentro da hero, para ficar acima do fundo */
+.suporte-hero .container {
+  position: relative; /* Permite usar z-index */
+  z-index: 1; /* Garante que o conteúdo fique acima da imagem de fundo */
+}
+
+/* Wrapper que divide a seção em duas colunas (imagem e formulário) */
+.suporte-split {
+  display: flex; /* Organiza os dois lados lado a lado */
+  width: 100%; /* Ocupa toda a largura disponível */
+  max-width: 1100px; /* Limita a largura máxima do card */
+  margin: 0 auto; /* Centraliza horizontalmente na página */
+  background: var(--bg-card); /* Cor de fundo do card, vinda do CSS global */
+  border: var(--border); /* Borda padrão do site */
+  border-radius: var(--radius); /* Cantos arredondados padrão do site */
+  overflow: hidden; /* Evita que o conteúdo interno "vaze" para fora dos cantos arredondados */
+  backdrop-filter: blur(6px); /* Efeito de desfoque no que estiver atrás do card (vidro fosco) */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4); /* Sombra suave para dar profundidade ao card */
+}
+
+/*Lado esquerdo: gif do Nathan como identidade visual*/
+/* Coluna esquerda, com o GIF de fundo */
+.suporte-info {
+  flex: 1; /* Ocupa uma parte proporcional do espaço (menor que o formulário) */
+  min-height: 420px; /* Altura mínima para a imagem não ficar pequena demais */
+  background-image: url("../img/nathan.gif"); /* GIF usado como identidade visual */
+  background-size: cover; /* Cobre toda a área da coluna */
+  background-position: center; /* Centraliza o GIF */
+  position: relative; /* Necessário para posicionar o overlay de texto por cima */
+}
+
+/* Camada escura sobreposta à imagem, onde fica o texto */
+.suporte-info__overlay {
+  position: absolute; /* Posiciona sobre a imagem de fundo */
+  bottom: 0; left: 0; width: 100%; /* Fixa na parte inferior, ocupando toda a largura */
+  padding: 30px; /* Espaçamento interno ao redor do texto */
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85)); /* Gradiente de transparente para escuro, garantindo legibilidade do texto */
+}
+
+/* Etiqueta "SUPORTE" dentro do overlay */
+.suporte-info__overlay .sectionTag {
+  margin-bottom: 10px; /* Espaço abaixo da etiqueta, antes do título */
+  background: var(--green); /* Fundo verde, cor de destaque do site */
+  color: #000; /* Texto preto para contrastar com o fundo verde */
+}
+
+/* Título principal dentro do overlay */
+.suporte-info__overlay h1 {
+  color: #AAF0D1; /* Verde claro para o título */
+  font-size: 1.8rem; /* Tamanho da fonte do título */
+  font-weight: 800; /* Peso bem forte (quase negrito extra) */
+}
+
+/*Lado direito: formulário*/
+/* Coluna direita, contendo o formulário */
+.suporte-form {
+  flex: 1.3; /* Ocupa uma parte um pouco maior do espaço do que a coluna da imagem */
+  padding: 40px; /* Espaçamento interno ao redor do formulário */
+}
+
+/* Título dentro do formulário */
+.suporte-form h2 {
+  font-size: 1.5rem; /* Tamanho da fonte do título do formulário */
+  font-weight: 800; /* Peso bem forte da fonte */
+  margin-bottom: 10px; /* Espaço abaixo do título */
+}
+
+/* Subtítulo/parágrafo explicativo do formulário */
+.suporte-form__subtitle {
+  color: rgba(233, 247, 240, 0.7); /* Cor esverdeada clara com transparência (texto secundário) */
+  line-height: 1.5; /* Espaçamento entre linhas para melhor leitura */
+  margin-bottom: 30px; /* Espaço abaixo do subtítulo, antes dos campos */
+}
+
+/* Grade que organiza os quatro primeiros campos do formulário */
+.grid-inputs {
+  display: grid; /* Ativa o layout em grade */
+  grid-template-columns: 1fr 1fr; /* Duas colunas de larguras iguais */
+  gap: 20px; /* Espaço entre os campos, tanto na horizontal quanto na vertical */
+}
+
+/* Estilo geral de cada grupo de campo (label + input + erro) */
+.input-group {
+  display: flex; /* Organiza os elementos internos em coluna (ver abaixo) */
+  flex-direction: column; /* Empilha label, campo e mensagem de erro verticalmente */
+  margin-bottom: 15px; /* Espaço abaixo de cada grupo de campo */
+  position: relative; /* Permite posicionamento de elementos filhos relativos a este grupo */
+}
+
+/* Rótulo (label) de cada campo */
+.input-group label {
+  font-weight: 700; /* Deixa o rótulo em negrito */
+  margin-bottom: 6px; /* Espaço entre o rótulo e o campo de entrada */
+  font-size: 0.85rem; /* Tamanho de fonte menor que o texto normal */
+  color: #e9f7f0; /* Cor clara (quase branca esverdeada) para o texto */
+}
+
+/* Estilo compartilhado entre input, select e textarea */
+.input-group input,
+.input-group select,
+.input-group textarea {
+  padding: 12px 14px; /* Espaçamento interno confortável para digitação */
+  border-radius: 10px; /* Cantos arredondados nos campos */
+  border: 1px solid rgba(233, 247, 240, 0.15); /* Borda sutil e semitransparente */
+  background: rgba(255, 255, 255, 0.04); /* Fundo quase transparente, dando efeito "vidro" */
+  color: #e9f7f0; /* Cor do texto digitado */
+  font-family: inherit; /* Usa a mesma fonte definida no restante do site */
+  font-size: 0.95rem; /* Tamanho de fonte do texto digitado */
+  width: 100%; /* Ocupa toda a largura disponível do grupo */
+  transition: border-color 0.3s ease, background 0.3s ease; /* Suaviza a mudança de cor da borda e fundo (ex: ao focar) */
+}
+
+/* Estilo das opções dentro do menu suspenso (select) */
+.input-group select option {
+  background: #0b0d0e; /* Fundo escuro para as opções do dropdown */
+  color: #e9f7f0; /* Texto claro para contrastar com o fundo escuro */
+}
+
+/* Cor do texto de exemplo (placeholder) dos campos de texto */
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.269); /* Branco bem apagado, indicando que é apenas um exemplo */
+}
+
+/* Estilo aplicado quando o campo está em foco (usuário clicou/está digitando) */
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+  outline: none; /* Remove o contorno padrão do navegador */
+  border-color: var(--green); /* Borda fica verde, cor de destaque do site */
+  box-shadow: 0 0 0 3px rgba(18, 247, 162, 0.25); /* Brilho verde suave ao redor do campo focado */
+}
+
+/* Campo de mensagem com tamanho fixo (sem permitir redimensionar puxando a lateral) */
+.input-group textarea {
+  resize: none; /* Impede que o usuário redimensione manualmente a caixa de texto */
+}
+
+/*Estados de erro*/
+/* Borda vermelha aplicada aos campos considerados inválidos pela validação em JS */
+.input-group input.invalid,
+.input-group select.invalid,
+.input-group textarea.invalid {
+  border-color: #ff4d4d !important; /* Vermelho forte, sobrepondo qualquer outra cor de borda */
+}
+
+/* Texto da mensagem de erro exibida abaixo de cada campo */
+.error-message {
+  color: #ff6b6b; /* Vermelho claro para o texto de erro */
+  font-size: 0.75rem; /* Fonte pequena, discreta */
+  margin-top: 4px; /* Pequeno espaço acima da mensagem */
+  font-weight: 600; /* Peso semi-negrito para destacar o aviso */
+  min-height: 1rem; /* Reserva um espaço mínimo, evitando que o layout "pule" quando o erro aparece */
+}
+
+/* Classe utilitária para elementos que devem ocupar toda a largura */
+.full-width { width: 100%; }
+
+/* Grupo que organiza os botões de ação do formulário */
+.button-group {
+  display: flex; /* Coloca os botões lado a lado */
+  gap: 15px; /* Espaço entre os botões */
+  margin-top: 10px; /* Espaço acima do grupo de botões */
+}
+
+/*Pop-up de sucesso*/
+/* Camada de fundo escurecido que cobre toda a tela quando o pop-up está ativo */
+.popup-overlay {
+  position: fixed; /* Fica fixo na tela, independente da rolagem */
+  top: 0; left: 0; width: 100%; height: 100%; /* Cobre toda a viewport */
+  background: rgba(0, 0, 0, 0.75); /* Fundo preto semitransparente, escurecendo o resto da página */
+  display: none; /* Fica escondido por padrão */
+  justify-content: center; /* Centraliza o conteúdo horizontalmente */
+  align-items: center; /* Centraliza o conteúdo verticalmente */
+  z-index: 100000; /* Garante que fique acima de todos os outros elementos */
+}
+
+/* Estado ativo do pop-up (classe adicionada via JS ao mostrar) */
+.popup-overlay.active {
+  display: flex; /* Exibe o overlay usando flexbox */
+  animation: fadeIn 0.3s ease; /* Aplica uma animação suave de entrada */
+}
+
+/* Caixa de conteúdo central do pop-up */
+.popup-content {
+  background: var(--bg-card, #0b0d0e); /* Cor de fundo do card (com valor alternativo caso a variável não exista) */
+  border: 1px solid var(--green); /* Borda verde de destaque */
+  padding: 35px; /* Espaçamento interno generoso */
+  border-radius: 20px; /* Cantos bem arredondados */
+  text-align: center; /* Centraliza todo o texto */
+  max-width: 320px; /* Largura máxima da caixa */
+  width: 90%; /* Ocupa 90% da largura disponível em telas pequenas */
+  color: #e9f7f0; /* Cor do texto padrão dentro do pop-up */
+}
+
+/* Ícone (check verde) dentro do pop-up */
+.popup-content i {
+  font-size: 3rem; /* Ícone grande, chamando atenção */
+  color: var(--green); /* Cor verde de destaque */
+  margin-bottom: 15px; /* Espaço abaixo do ícone */
+}
+
+/* Título dentro do pop-up */
+.popup-content h3 {
+  color: #fff; /* Texto branco puro */
+  margin-bottom: 12px; /* Espaço abaixo do título */
+  font-size: 1.4rem; /* Tamanho da fonte do título */
+}
+
+/* Parágrafo explicativo dentro do pop-up */
+.popup-content p {
+  color: rgba(233, 247, 240, 0.7); /* Texto esverdeado claro e semitransparente */
+  margin-bottom: 25px; /* Espaço abaixo do parágrafo, antes do botão */
+  line-height: 1.6; /* Espaçamento entre linhas para facilitar a leitura */
+}
+
+/* Botão de fechar/confirmar dentro do pop-up */
+.popup-content button {
+  margin-top: 15px; /* Espaço acima do botão */
+  padding: 10px 25px; /* Espaçamento interno do botão */
+  background: var(--green); /* Fundo verde de destaque */
+  color: #06251b; /* Texto verde bem escuro, contrastando com o fundo claro */
+  border: none; /* Remove a borda padrão do botão */
+  border-radius: 8px; /* Cantos arredondados */
+  font-weight: bold; /* Texto em negrito */
+  cursor: pointer; /* Muda o cursor para indicar que é clicável */
+}
+
+/* Animação usada ao exibir o pop-up */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); } /* Começa invisível e levemente menor */
+  to { opacity: 1; transform: scale(1); } /* Termina totalmente visível e no tamanho normal */
+}
+
+/*Responsividade*/
+/* Ajustes para telas médias (tablets e afins) */
+@media (max-width: 900px) {
+  .suporte-split { flex-direction: column; } /* Empilha as colunas (imagem em cima, formulário embaixo) */
+  .suporte-info { min-height: 220px; } /* Reduz a altura da imagem em telas menores */
+  .grid-inputs { grid-template-columns: 1fr; } /* Os campos passam a ocupar uma única coluna */
+}
+
+/* Ajustes para telas pequenas (celulares) */
+@media (max-width: 600px) {
+  .suporte-hero { padding: 100px 0 60px; } /* Reduz o espaçamento vertical da seção */
+  .suporte-form { padding: 25px; } /* Reduz o espaçamento interno do formulário */
+  .button-group { flex-direction: column; } /* Empilha os botões verticalmente em telas estreitas */
+}

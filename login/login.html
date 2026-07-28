@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!-- Documento HTML5, idioma português do Brasil -->
+<html lang="pt-br">
+<head>
+  <!-- Define a codificação de caracteres como UTF-8 (acentos, ç, etc) -->
+  <meta charset="UTF-8">
+  <!-- Faz a página se adaptar à largura da tela do dispositivo (responsivo) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Título que aparece na aba do navegador -->
+  <title>Nexum | Login</title>
+  <!-- Ícone que aparece na aba do navegador (mesmo favicon usado no resto do site) -->
+  <link rel="icon" href="../img/favicon-96x96.png" type="image/png" />
+  <!-- Importa o CSS específico desta tela de login -->
+  <link rel="stylesheet" href="login.css">
+  <!-- Font Awesome: biblioteca de ícones (envelope, olho, etc), mesma usada no cadastro -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Cartão central que contém todo o formulário de login -->
+  <main class="card">
+
+    <!-- Cabeçalho do cartão: logo à esquerda + link de cadastro à direita -->
+    <header class="card-header">
+      <!-- Logo da Nexum (mesma imagem usada na tela de cadastro) -->
+      <img src="../img/logo.png" alt="Nexum" class="logo">
+      <!-- Texto + link que leva quem não tem conta para a tela de cadastro -->
+      <p class="cadastro-link">Não tem uma conta? <a href="../cadastrar/cadastro.html">Criar conta</a></p>
+    </header>
+
+    <!-- Título principal da tela -->
+    <h1 class="title-center">LOGIN</h1>
+    <!-- Subtítulo explicativo abaixo do título -->
+    <p class="subtitle-center">Faça login para acessar sua conta na Nexum.</p>
+
+    <!-- Formulário de login. "novalidate" desliga a validação padrão do navegador,
+         porque nós fazemos a nossa própria validação em JavaScript -->
+    <form id="loginForm" novalidate>
+
+      <!-- Campo: Email -->
+      <div class="input-group">
+        <label for="email">E-mail</label>
+        <div class="wrapper-input">
+          <!-- type="email" ajuda em dispositivos móveis (teclado com @), mas quem valida de verdade é o JS -->
+          <input type="email" id="email" name="email" placeholder="Digite seu e-mail">
+          <!-- Ícone de envelope, apenas decorativo (fica sempre parado, sem clique) -->
+          <i class="fa-solid fa-envelope input-icon"></i>
+        </div>
+        <!-- Espaço reservado para a mensagem de erro deste campo -->
+        <span class="error-message" id="error-email"></span>
+      </div>
+
+      <!-- Campo: Senha -->
+      <div class="input-group">
+        <label for="senha">Senha</label>
+        <div class="wrapper-input">
+          <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
+          <!-- Ícone de olho: ao clicar, alterna entre mostrar e esconder a senha digitada -->
+          <i class="fa-regular fa-eye toggle-password" data-target="senha"></i>
+        </div>
+        <!-- Espaço reservado para a mensagem de erro deste campo -->
+        <span class="error-message" id="error-senha"></span>
+      </div>
+
+      <!-- Botão de envio do formulário -->
+      <div class="botao-wrapper">
+        <button type="submit" id="botaoEntrar">Entrar</button>
+        <!-- Tooltip/Pop-up explicativo abaixo do botão quando estiver bloqueado -->
+        <div id="botaoTooltip" class="botao-tooltip"></div>
+      </div>
+    </form>
+  </main>
+
+  <!-- Pop-up de erro/aviso, mostrado quando a validação falha no envio -->
+  <div id="custom-popup" class="popup-overlay">
+    <div class="popup-content">
+      <i class="fa-solid fa-triangle-exclamation" id="popup-icon"></i>
+      <h3 id="popup-title">Atenção</h3>
+      <p id="popup-mensagem">Senha ou e-mail incorreto. Verifique se os dados estão corretamente preenchidos de acordo com os dados fornecidos no cadastro.</p>
+      <!-- Ao clicar em "Ok", chama a função closePopup() definida no login.js -->
+      <button type="button" onclick="closePopup()">Ok</button>
+    </div>
+  </div>
+
+  <!-- Importa o JavaScript desta tela (deve vir depois do HTML para os elementos já existirem) -->
+  <script src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nexum | Ferramenta</title>
+  <link rel="icon" href="../img/favicon-96x96.png" type="image/png" />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="ferramenta.css" />
+</head>
+<body>
+
+  <header class="topbar" id="mainHeader">
+    <div class="container topbar__inner">
+      <a href="../index.html"><img class="brand__logo" src="../img/logo.png" alt="Nexum" /></a>
+
+      <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <nav class="nav">
+        <a href="../index.html" class="nav__link">Início</a>
+        <a href="ferramenta.html" class="nav__link">Ferramenta</a>
+        <a href="../planos/planos.html" class="nav__link">Planos</a>
+        <a href="../sobrenos/sobrenos.html" class="nav__link">Sobre Nós</a>
+        <a href="../suporte/suporte.html" class="nav__link">Suporte</a>
+
+        <div class="mobile-only mobile-buttons">
+          <a href="../login/login.html" target="_blank" rel="noopener noreferrer">
+            <button class="btn btn--ghost">Entrar</button>
+          </a>
+          <a href="../cadastrar/cadastro.html" target="_blank" rel="noopener noreferrer">
+            <button class="btn btn--primary">Criar Conta</button>
+          </a>
+        </div>
+      </nav>
+
+      <div class="topbar__actions desktop-only">
+        <a href="../login/login.html">
+          <button class="btn btn--ghost">Entrar</button>
+        </a>
+        <a href="../cadastrar/cadastro.html">
+          <button class="btn btn--primary">Criar Conta</button>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="ferramentaHero">
+      <div class="container">
+        <span class="sectionTag">FERRAMENTA</span>
+        <h1 class="ferramentaTitle">Simplifique um documento <span class="text-green">em segundos.</span></h1>
+        <p class="ferramentaSubtitle">Escolha o tipo de documento, envie um exemplo e veja a tradução em linguagem simples, junto com o que você precisa fazer a respeito.</p>
+      </div>
+    </section>
+
+    <section class="container ferramentaApp">
+
+      <!-- Passo 1: escolher o tipo de documento -->
+      <div class="ferramentaCard" id="passoTipo">
+        <div class="ferramentaStep">
+          <span class="stepNumber">1</span>
+          <h2 class="stepTitle">Que tipo de documento é?</h2>
+        </div>
+        <div class="tipoGrid" id="tipoGrid">
+          <button class="tipoCard" data-tipo="aluguel">
+            <span class="tipoIcon">🏠</span>
+            <span class="tipoNome">Contrato de Aluguel</span>
+          </button>
+          <button class="tipoCard" data-tipo="laudo">
+            <span class="tipoIcon">🩺</span>
+            <span class="tipoNome">Laudo Médico</span>
+          </button>
+          <button class="tipoCard" data-tipo="boleto">
+            <span class="tipoIcon">🧾</span>
+            <span class="tipoNome">Boleto / Conta</span>
+          </button>
+          <button class="tipoCard" data-tipo="edital">
+            <span class="tipoIcon">📋</span>
+            <span class="tipoNome">Edital / Comunicado</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Passo 2: enviar o documento -->
+      <div class="ferramentaCard ferramentaCard--disabled" id="passoUpload">
+        <div class="ferramentaStep">
+          <span class="stepNumber">2</span>
+          <h2 class="stepTitle">Envie o documento</h2>
+        </div>
+
+        <label class="uploadArea" id="uploadArea">
+          <input type="file" id="fileInput" hidden />
+          <span class="uploadIcon">📄</span>
+          <span class="uploadTexto">Arraste o arquivo aqui ou <span class="uploadLink">clique para escolher</span></span>
+          <span class="uploadFormatos">PDF, JPG ou PNG</span>
+        </label>
+
+        <div class="uploadArquivo" id="uploadArquivo" hidden>
+          <span class="uploadArquivoIcon">📄</span>
+          <span class="uploadArquivoNome" id="uploadArquivoNome"></span>
+          <button class="uploadArquivoRemover" id="uploadArquivoRemover" aria-label="Remover arquivo">✕</button>
+        </div>
+
+        <button class="btn btn--primary ferramentaBtn" id="btnSimplificar" disabled>Simplificar documento</button>
+        <p class="ferramentaAviso">Demonstração: nenhum arquivo é enviado a um servidor. Este protótipo usa um exemplo pronto para mostrar como o resultado funciona.</p>
+      </div>
+
+      <!-- Carregando -->
+      <div class="ferramentaCard ferramentaLoading" id="passoLoading" hidden>
+        <div class="loadingSpinner"></div>
+        <p class="loadingTexto">Traduzindo o documento para uma linguagem simples...</p>
+      </div>
+
+      <!-- Passo 3: resultado -->
+      <div class="ferramentaCard ferramentaResultado" id="passoResultado" hidden>
+        <div class="ferramentaStep">
+          <span class="stepNumber">3</span>
+          <h2 class="stepTitle">Aqui está a tradução</h2>
+        </div>
+
+        <div class="resultadoGrid">
+          <div class="resultadoBloco">
+            <div class="resultadoBlocoHeader">
+              <span class="resultadoBlocoIcon">💬</span>
+              <h3>O que esse documento significa</h3>
+            </div>
+            <ul class="resultadoLista" id="resumoLista"></ul>
+          </div>
+
+          <div class="resultadoBloco resultadoBloco--acao">
+            <div class="resultadoBlocoHeader">
+              <span class="resultadoBlocoIcon">✅</span>
+              <h3>O que você precisa fazer</h3>
+            </div>
+            <ul class="resultadoLista" id="acaoLista"></ul>
+
+            <div class="lembreteBox" id="lembreteBox" hidden>
+              <span class="lembreteIcon">🗓️</span>
+              <div>
+                <p class="lembreteTitulo">Lembrete sugerido</p>
+                <p class="lembreteTexto" id="lembreteTexto"></p>
+              </div>
+              <button class="btn btn--outline lembreteBtn" id="btnLembrete">Adicionar ao calendário</button>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn--ghost ferramentaBtn" id="btnNovoDocumento">Simplificar outro documento</button>
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__grid">
+
+      <div class="footer__brand">
+        <img class="footer__logo" src="../img/logo.png" alt="Nexum">
+        <p class="footer__tagline">"Simplificando o mundo para você."</p>
+        <div class="footer__social-icon">
+          <img src="../img/insta.png" alt="Instagram">
+          <a href="https://instagram.com/contatenexum" target="_blank" rel="noopener noreferrer">@contatenexum</a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <div class="footer__title">Navegação</div>
+        <a href="../index.html">Início</a>
+        <a href="ferramenta.html">Ferramenta</a>
+        <a href="../planos/planos.html">Planos</a>
+        <a href="../sobrenos/sobrenos.html">Sobre Nós</a>
+        <a href="../suporte/suporte.html">Suporte</a>
+      </div>
+      <div class="footer__col">
+        <div class="footer__title">Contato</div>
+        <p>✉ contatenexum@gmail.com</p>
+      </div>
+    </div>
+    <div class="footer__bottom">© 2026 Nexum. Todos os direitos reservados.</div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script src="ferramenta.js"></script>
+</body>
+</html>

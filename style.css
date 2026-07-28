@@ -1,0 +1,562 @@
+/*Reset básico*/
+html {
+  overflow-x: hidden; /* esconde qualquer conteúdo que ultrapasse a largura horizontal da tela, evitando rolagem lateral */
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; } /* aplica a todos os elementos: inclui borda/padding na largura total (box-sizing), zera margens e paddings padrão do navegador */
+
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans"; /* define uma pilha de fontes do sistema, priorizando as nativas de cada SO/navegador */
+  background: #050607; /* cor de fundo quase preta para toda a página */
+  color: #e9f7f0; /* cor padrão do texto: branco levemente esverdeado */
+  line-height: 1.5; /* altura de linha confortável para leitura geral do site */
+  padding-top: 60px; /* espaço de 60px no topo para compensar o header fixo e não cobrir o conteúdo */
+  /* SEM overflow-x aqui */ /* comentário do autor avisando que overflow-x não foi aplicado no body de propósito */
+}
+
+:root {
+  --green: #12f7a2; /* variável global: cor verde principal usada em todo o site */
+  --bg-card: rgba(0, 0, 0, 0.18); /* variável global: cor de fundo padrão para cards, preto com 18% de opacidade */
+  --border: 1px solid rgba(18, 247, 162, 0.16); /* variável global: estilo de borda padrão, verde bem sutil */
+  --radius: 18px; /* variável global: raio de borda padrão para cantos arredondados */
+  --max: 1200px; /* variável global: largura máxima padrão do conteúdo */
+}
+
+.container { width: min(var(--max), calc(100% - 40px)); margin-inline: auto; } /* largura do container é o menor valor entre 1200px e "100% menos 40px", e centraliza horizontalmente com margens automáticas nas laterais */
+
+/*Header*/
+/* Header fixo com prioridade absoluta */
+header.topbar {
+     position: fixed !important; /* fixa o header na tela, ignorando o scroll da página; !important força essa regra a sobrepor qualquer outra */
+    top: 0 !important; /* gruda o header no topo da tela (0px de distância) */
+    left: 0 !important; /* alinha o header à borda esquerda da tela */
+    right: 0 !important; /* alinha o header à borda direita da tela */
+    width: 100% !important; /* faz o header ocupar toda a largura da tela */
+    z-index: 999999 !important; /* garante que o header fique acima de praticamente todos os outros elementos */
+    background-color: #050607 !important; /* cor de fundo do header, igual à cor de fundo do body */
+    border-bottom: 1px solid #12f7a2 !important; /* linha verde fina na parte inferior do header, separando-o do conteúdo */
+    height: 60px !important; /* altura fixa do header de 60px */
+    margin: 0 !important; /* remove qualquer margem externa do header */
+    padding: 0 !important; /* remove qualquer espaçamento interno do header */
+    display: flex !important; /* ativa layout flexbox no header */
+    align-items: center !important; /* centraliza verticalmente os itens dentro do header */
+    transition: transform 0.35s ease !important; /* anima suavemente qualquer mudança de "transform" (usado para esconder/mostrar o header) em 0.35s */
+}
+
+/* Classe adicionada via JS quando o usuário rola pra baixo -> esconde o header */
+header.topbar.header--hidden {
+  transform: translateY(-100%) !important; /* move o header para cima, para fora da tela (100% da sua própria altura), escondendo-o */
+}
+
+/* Garante que o container interno acompanhe a altura */
+.topbar__inner {
+    height: 100% !important; /* faz o container interno ocupar toda a altura do header (60px) */
+    display: flex; /* ativa flexbox no container interno */
+    align-items: center; /* centraliza verticalmente os itens (logo, nav, ações) */
+    justify-content: space-between; /* distribui os itens com espaço entre eles: logo à esquerda, ações à direita */
+}
+
+.brand__logo { 
+  height: 125px; /* altura da logo maior que o próprio header (60px), fazendo-a "vazar" visualmente */
+  width: auto; /* largura proporcional automática, mantendo a proporção da imagem */
+  display: block; /* remove espaços extras que imagens inline costumam ter */
+  margin-top: -5px; /* desloca a logo 5px para cima (margem negativa) para ajuste fino de posição */
+  position: relative; /* permite usar z-index e ajustar a posição da logo em relação ao fluxo normal */
+  z-index: 10; /* garante que a logo fique acima de outros elementos próximos, mesmo "vazando" do header */
+  margin-left: 8px; /* espaçamento de 8px à esquerda da logo */
+}
+
+.nav { display: flex; gap: 26px; } /* menu de navegação em flexbox, com espaçamento de 26px entre os links */
+.nav__link { 
+  color: rgba(233, 247, 240, 0.85); text-decoration: none; /* cor do link em branco esverdeado com 85% de opacidade, sem sublinhado */
+  font-weight: 500; font-size: 14px; cursor: pointer; /* peso de fonte médio, tamanho 14px, cursor de "mão" ao passar o mouse */
+  position: relative; padding-bottom: 2px; transition: color 0.3s ease; /* posição relativa (para o ::after), pequeno espaço abaixo do texto, transição suave na cor em 0.3s */
+}
+.nav__link:hover { color: #00ff9d; } /* ao passar o mouse, o link muda para um verde mais vibrante */
+.nav__link::after {
+  content: ""; position: absolute; left: 0; bottom: -20px; /* cria uma linha (pseudo-elemento) posicionada 20px abaixo do link, alinhada à esquerda */
+  width: 0; height: 2px; background-color: #00ff9d; /* linha começa com largura zero (invisível), altura de 2px, cor verde vibrante */
+  transition: width 0.3s ease; /* anima suavemente a mudança de largura em 0.3s */
+}
+.nav__link:hover::after, .nav__link:focus::after { width: 100%; } /* ao passar o mouse ou focar (ex: navegação por teclado), a linha cresce até 100% da largura do link, criando efeito de sublinhado animado */
+
+.topbar__actions { display: flex; gap: 12px; } /* área de botões/ações do header em flexbox, com espaçamento de 12px entre eles */
+
+
+/*Hero*/
+.hero { 
+  padding: 120px 0; /* espaçamento interno vertical de 120px, sem espaçamento horizontal */
+  background-image: url("img/fundo.png"); /* define a imagem de fundo da seção hero */
+  background-size: cover; /* faz a imagem cobrir todo o elemento, sem distorcer */
+  background-position: center; /* centraliza a imagem de fundo */
+  background-repeat: no-repeat; /* impede que a imagem se repita */
+  position: relative; /* permite posicionar elementos filhos de forma absoluta em relação a este */
+}
+
+.hero::after {
+  content: ""; /* cria um elemento vazio (necessário para pseudo-elementos funcionarem) */
+  position: absolute; /* posiciona em relação ao .hero */
+  left: 0; /* alinha à esquerda do elemento pai */
+  bottom: 0; /* fixa na parte inferior do .hero, logo abaixo da imagem de fundo */
+  width: 100%; /* ocupa toda a largura do elemento pai */
+  height: 1px; /* altura de 1px, criando uma linha fina */
+  background-color: rgba(18, 247, 162, 0.16); /* mesmo tom e opacidade da borda usada nos cards (var(--border)) */
+}
+
+.hero__content--full { 
+  display: flex; /* ativa layout flexbox */
+  flex-direction: column; /* organiza os itens filhos em coluna (um abaixo do outro) */
+  align-items: flex-start; /* alinha os itens à esquerda no eixo transversal */
+  text-align: left; /* alinha o texto à esquerda */
+  padding-left: 20px; /* adiciona espaçamento interno de 20px à esquerda */
+}
+
+/* Componente Brand Body */
+.brand-body {
+  display: flex; /* ativa layout flexbox */
+  flex-direction: column; /* organiza os itens em coluna */
+  align-items: flex-start; /* alinha os itens à esquerda */
+  margin-bottom: 20px; /* espaçamento externo de 20px abaixo do componente */
+}
+
+.brand-body__logo { 
+  height: 80px; /* altura fixa do logo */
+  width: auto; /* largura proporcional automática, mantendo a proporção da imagem */
+  margin-left: -8px; /* desloca o logo 8px para a esquerda (margem negativa) */
+  margin-bottom: -10px; /* desloca o logo 10px para baixo (margem negativa) */
+}
+
+.brand-body__tagline { 
+  color: rgba(233, 247, 240, 0.6); /* cor do texto em branco esverdeado com 60% de opacidade */
+  font-size: 14px; /* tamanho da fonte de 14px */
+  margin-bottom: 5px; /* espaçamento externo de 5px abaixo */
+}
+
+.brand-body__social { 
+  display: inline-block; /* permite aplicar margens/padding mantendo comportamento inline */
+  color: var(--green); /* usa a cor verde definida na variável CSS global */
+  text-decoration: none; /* remove sublinhado padrão de links */
+  font-size: 14px; /* tamanho da fonte de 14px */
+  position: relative; /* necessário para posicionar o pseudo-elemento ::after */
+  padding-bottom: 2px; /* espaço abaixo do texto para a linha do ::after não colar */
+}
+
+.brand-body__social::after {
+  content: ""; /* cria um elemento vazio (necessário para pseudo-elementos funcionarem) */
+  position: absolute; /* posiciona em relação ao .brand-body__social */
+  left: 0; /* alinha à esquerda do elemento pai */
+  bottom: 0; /* alinha na parte inferior do elemento pai */
+  width: 100%; /* ocupa toda a largura do elemento pai */
+  height: 1px; /* altura de 1px, criando uma linha fina */
+  background-color: var(--green); /* cor verde da linha, usando a variável global */
+}
+
+/* Efeito de Glitter no texto verde */
+.glitter-text {
+  position: relative; /* permite controle de empilhamento e possíveis elementos futuros */
+  text-shadow: 0 0 10px rgba(18, 247, 162, 0.5), 0 0 20px rgba(18, 247, 162, 0.3); /* aplica dois brilhos (glow) verdes sobrepostos ao texto */
+  background: linear-gradient(90deg, var(--green), #fff, var(--green)); /* cria um degradê horizontal verde-branco-verde usado como "tinta" do texto */
+  -webkit-background-clip: text; /* recorta o fundo no formato do texto (compatibilidade com navegadores WebKit) */
+  background-clip: text; /* recorta o fundo no formato do texto (padrão) */
+  color: transparent; /* torna o texto transparente para revelar o degradê de fundo */
+  animation: shimmer 3s infinite linear; /* aplica a animação "shimmer" com duração de 3s, infinita e velocidade constante */
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; } /* posição inicial do degradê, fora da área visível à esquerda */
+  100% { background-position: 200% 0; } /* posição final do degradê, fora da área visível à direita, criando o efeito de brilho deslizante */
+}
+
+.hero__title { 
+  font-size: clamp(34px, 5vw, 64px); /* tamanho de fonte responsivo: mínimo 34px, ideal 5% da largura da viewport, máximo 64px */
+  line-height: 1.1; /* altura da linha compacta, adequada para títulos grandes */
+  margin-bottom: 20px; /* espaçamento externo de 20px abaixo do título */
+  font-weight: 800; /* peso da fonte bem negrito (extra bold) */
+  max-width: 800px; /* largura máxima de 800px para evitar linhas muito longas */
+}
+
+.text-green { color: var(--green); } /* classe utilitária que aplica a cor verde da variável global ao texto */
+
+.hero__cta { 
+  display: flex; /* ativa layout flexbox para os botões de call-to-action */
+  gap: 15px; /* espaçamento de 15px entre os botões */
+  justify-content: flex-start; /* alinha os botões à esquerda */
+}
+/*Recursos & Stats*/
+.section { padding: 60px 0; } /* espaçamento interno vertical de 60px para seções genéricas */
+.sectionHeader { text-align: center; margin-bottom: 40px; } /* centraliza o texto do cabeçalho e adiciona 40px de espaço abaixo */
+.kicker { color: var(--green); font-weight: 900; font-size: 12px; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; } /* pequeno rótulo verde, bem negrito, maiúsculo, com espaçamento entre letras */
+
+/* Caixinha redonda (pill) de destaque, igual à usada em "DEPOIMENTOS", agora disponível também para o cabeçalho de Funcionalidades */
+.sectionTag {
+  display: inline-block; /* comporta-se como bloco em linha, permitindo padding sem quebrar o fluxo do texto ao redor */
+  background: rgba(0, 200, 120, 0.1); /* fundo verde bem sutil (10% de opacidade), criando o efeito de "caixinha" suave */
+  color: var(--green); /* cor do texto verde, usando a variável global */
+  font-size: 12px; /* fonte pequena, igual ao kicker */
+  font-weight: 600; /* peso semi-negrito */
+  letter-spacing: 0.05em; /* leve espaçamento entre as letras */
+  padding: 4px 12px; /* espaçamento interno: 4px vertical, 12px horizontal */
+  border-radius: 20px; /* cantos bem arredondados, formando o formato de "pílula" arredondada */
+  margin-bottom: 12px; /* espaçamento externo de 12px abaixo, separando do título da seção */
+}
+
+.sectionTitle { font-size: 36px; font-weight: 800; } /* título de seção grande e bem negrito */
+.sectionSubtitle { 
+  max-width: 600px; /* largura máxima de 600px */
+  margin: 0 auto 30px; /* centraliza horizontalmente (auto nas laterais) e adiciona 30px de margem inferior */
+  line-height: 1.6; /* altura de linha confortável para leitura */
+  color: rgba(233, 247, 240, 0.7); /* cor branco esverdeado com 70% de opacidade */
+}
+
+.featureGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; } /* grade com 4 colunas de largura igual e espaçamento de 20px entre os itens */
+
+.cardFeature { 
+  padding: 25px; /* espaçamento interno de 25px em todos os lados */
+  border-radius: var(--radius); /* cantos arredondados, usando raio definido na variável global */
+  border: var(--border); /* borda definida pela variável global */
+  background: var(--bg-card); /* cor de fundo do card, usando variável global */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* anima suavemente mudanças de transformação, sombra e cor da borda em 0.3s */
+}
+
+/* Efeito de hover aplicado exclusivamente aos 4 cards de recursos */
+.cardFeature:hover {
+  transform: translateY(-5px); /* move o card 5px para cima ao passar o mouse */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* adiciona sombra suave abaixo do card, dando efeito de elevação */
+  border-color: var(--green); /* muda a cor da borda para verde no hover */
+}
+
+/* Em telas menores, a grade vira 1 coluna e o 4º card sobe para logo abaixo do 1º */
+@media (max-width: 900px) {
+  .featureGrid { grid-template-columns: 1fr; } /* em telas de até 900px, a grade passa a ter apenas 1 coluna, empilhando os cards verticalmente */
+  .cardFeature:nth-child(4) { order: 1; } /* como o 1º card mantém a ordem padrão (0), o 4º card com order 1 passa a aparecer logo em seguida, ficando embaixo do primeiro; os cards 2 e 3 (sem order definido, também 0) mantêm sua sequência normal depois dele */
+}
+
+.statsBar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 24px;
+  padding: 40px;
+  border-radius: var(--radius);
+  border: var(--border);
+  background: var(--bg-card);
+  margin: 40px auto;
+} /* barra de estatísticas em grid, colunas flexíveis de largura igual (mínimo 120px), com espaçamento entre elas, padding, bordas arredondadas, fundo e margem automática para centralizar */
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+} /* cada item de estatística em coluna, centralizado, com pequeno espaçamento entre número e legenda */
+
+.statItem strong {
+  font-size: 24px;
+  color: var(--green);
+} /* número da estatística em destaque: fonte grande e cor verde */
+/* Depoimentos */
+.testGrid {
+  display: grid; /* ativa layout em grade */
+  grid-template-columns: repeat(4, 1fr); /* cria 4 colunas de largura igual */
+  gap: 20px; /* espaçamento de 20px entre os itens da grade */
+}
+
+.quoteCard {
+  display: flex; /* ativa flexbox no card de depoimento */
+  flex-direction: column; /* organiza o conteúdo do card em coluna */
+  padding: 20px; /* espaçamento interno de 20px */
+  border-radius: var(--radius); /* cantos arredondados conforme variável global */
+  border: var(--border); /* borda conforme variável global */
+  background: var(--bg-card); /* cor de fundo conforme variável global */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* transições suaves para transformação, sombra e borda */
+}
+
+.quoteCard:hover {
+  transform: translateY(-5px); /* eleva o card 5px ao passar o mouse */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* sombra suave criando efeito de profundidade */
+  border-color: var(--green); /* borda fica verde no hover */
+}
+
+.stars {
+  color: var(--green); /* cor verde para as estrelas de avaliação */
+  font-size: 14px; /* tamanho da fonte das estrelas */
+  letter-spacing: 2px; /* espaçamento entre as estrelas */
+  margin-bottom: 10px; /* espaço abaixo das estrelas */
+}
+
+.quote {
+  font-weight: 700; /* texto do depoimento em negrito */
+  font-size: 16px; /* tamanho de fonte 16px */
+  margin-bottom: 8px; /* espaço de 8px abaixo da citação */
+}
+
+.quoteDesc {
+  font-size: 13px; /* fonte menor para a descrição do depoimento */
+  color: var(--text-muted, #9aa0a6); /* cor de texto suavizada, com fallback cinza caso a variável não exista */
+  line-height: 1.5; /* altura de linha confortável para leitura */
+  margin-bottom: 16px; /* espaço de 16px abaixo do texto */
+  flex-grow: 1; /* faz esse elemento crescer para ocupar o espaço restante no card flex */
+}
+
+.quoteAuthor {
+  display: flex; /* alinha avatar e informações do autor lado a lado */
+  align-items: center; /* centraliza verticalmente os itens */
+  gap: 10px; /* espaçamento de 10px entre avatar e texto */
+  padding-top: 12px; /* espaçamento interno superior de 12px */
+  border-top: 1px solid rgba(255, 255, 255, 0.08); /* linha divisória sutil acima da área do autor */
+}
+
+.avatar {
+  width: 36px; /* largura do avatar */
+  height: 36px; /* altura do avatar */
+  border-radius: 50%; /* deixa o avatar completamente redondo */
+  display: flex; /* centraliza o conteúdo interno (ex: iniciais) */
+  align-items: center; /* centraliza verticalmente */
+  justify-content: center; /* centraliza horizontalmente */
+  font-size: 13px; /* tamanho da fonte das iniciais */
+  font-weight: 700; /* iniciais em negrito */
+  color: #1a1a1a; /* cor escura para contraste com fundo claro do avatar */
+  flex-shrink: 0; /* impede que o avatar encolha dentro do flex container */
+}
+
+.quoteName {
+  font-size: 13px; /* tamanho de fonte do nome do autor */
+  font-weight: 600; /* nome em semi-negrito */
+  color: var(--text, #fff); /* cor do texto, com fallback branco caso a variável não exista */
+}
+
+.quoteRole {
+  font-size: 12px; /* fonte menor para o cargo/função do autor */
+  color: var(--text-muted, #9aa0a6); /* cor suavizada, com fallback cinza */
+}
+
+.testFooter {
+  display: flex; /* ativa flexbox no rodapé da seção de depoimentos */
+  justify-content: flex-end; /* alinha o conteúdo (botão) à direita */
+  margin-top: 20px; /* espaço de 20px acima do rodapé */
+}
+
+.btnOutline {
+  background: transparent; /* fundo transparente, sem preenchimento */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* borda fina branca semitransparente */
+  color: var(--text, #fff); /* cor do texto, com fallback branco */
+  padding: 10px 20px; /* espaçamento interno: 10px vertical, 20px horizontal */
+  border-radius: var(--radius); /* cantos arredondados conforme variável global */
+  cursor: pointer; /* muda o cursor para indicar que é clicável */
+  transition: border-color 0.3s ease, color 0.3s ease; /* transição suave na cor da borda e do texto */
+}
+
+.btnOutline:hover {
+  border-color: var(--green); /* borda fica verde ao passar o mouse */
+  color: var(--green); /* texto fica verde ao passar o mouse */
+}
+
+@media (max-width: 900px) {
+  .testGrid { grid-template-columns: repeat(2, 1fr); } /* em telas até 900px, a grade de depoimentos passa a ter 2 colunas */
+}
+
+@media (max-width: 560px) {
+  .testGrid { grid-template-columns: 1fr; } /* em telas até 560px, a grade de depoimentos passa a ter 1 coluna (empilhada) */
+}
+
+/* Footer */
+.footer { 
+  border-top: var(--border); /* Adiciona uma borda superior utilizando uma variável CSS personalizada */
+  padding: 60px 0 30px; /* Define o espaçamento interno: 60px em cima, 0 nas laterais e 30px embaixo */
+  background: #050607; /* Define a cor de fundo preta/escura do rodapé */
+}
+
+.footer__grid { 
+  display: grid; /* Transforma o container em um grid CSS */
+  grid-template-columns: 2fr 1fr 1fr 1fr; /* Divide o grid em 4 colunas: a primeira ocupa o dobro do espaço (2 partes), e as outras três ocupam 1 parte cada */
+  gap: 40px; /* Define um espaçamento de 40px entre os elementos do grid */
+  align-items: start; /* Alinha os itens ao topo do grid verticalmente */
+}
+
+/* Footer Brand */
+.footer__brand {
+  display: flex; /* Define o container como flexbox para organizar os elementos filhos */
+  flex-direction: column; /* Organiza os elementos filhos em uma coluna (verticalmente) */
+  align-items: flex-start; /* Alinha os elementos filhos à esquerda */
+  gap: 0px !important; /* Remove qualquer espaçamento entre os itens com prioridade máxima */
+  padding: 0; /* Remove o espaçamento interno (preenchimento) */
+  margin: 0; /* Remove o espaçamento externo */
+  margin-top: -20px; /* Sobe apenas essa coluna (logo, tagline e ícone social) em relação às outras colunas do footer__grid, que continuam alinhadas ao topo normalmente */
+}
+
+.footer__logo { 
+  height: 120px; /* Define a altura fixa da logo */
+  width: auto; /* Mantém a proporção da largura automaticamente com base na altura */
+  display: block; /* Transforma a imagem em elemento de bloco para evitar espaços indesejados */
+  margin-left: -10px; /* Desloca a logo levemente para a esquerda */
+  margin-bottom: -40px; /* Puxa o conteúdo de baixo para cima, aproximando-o da logo */
+  padding: 0; /* Remove o espaçamento interno */
+}
+
+.footer__tagline { 
+  color: rgba(233, 247, 240, 0.6); /* Define a cor do texto (verde-claro com opacidade de 60%) */
+  font-weight: 500; /* Define a espessura da fonte como média (semi-bold) */
+  font-size: 14px; /* Define o tamanho da fonte */
+  line-height: 1; /* Define a altura da linha como compacta (igual ao tamanho da fonte) */
+  margin: 0; /* Remove o espaçamento externo */
+  padding: 0; /* Remove o espaçamento interno */
+  padding-left: 50px; /* Adiciona um recuo à esquerda para alinhar o texto */
+}
+
+.footer__social-icon { 
+  display: flex; /* Transforma em flexbox para alinhar o ícone e o texto lado a lado */
+  align-items: center; /* Centraliza verticalmente o ícone e o texto */
+  margin: 0; /* Remove o espaçamento externo padrão */
+  padding: 0; /* Remove o espaçamento interno padrão */
+  margin-top: 3px; /* Adiciona um espaço acima para distanciar da tagline */
+  padding-left: 47px; /* Mantém o recuo à esquerda para alinhar com os outros elementos */
+}
+/* Controla diretamente a imagem PNG do Instagram (tamanho de 26px e colorida de verde menta) */
+.footer__social-icon img {
+  width: 26px; /* Largura do ícone */
+  height: 26px; /* Altura proporcional do ícone */
+  object-fit: contain; /* Garante que a proporção seja mantida */
+  display: block; /* Comportamento de bloco */
+  
+  /* Aplica o filtro para tingir a imagem PNG de verde menta */
+  filter: brightness(0) saturate(100%) invert(70%) sepia(35%) saturate(500%) hue-rotate(90deg);
+}
+
+/* Efeito opcional: aumenta o brilho levemente ao passar o mouse */
+.footer__social-icon img:hover {
+  filter: brightness(0) saturate(100%) invert(80%) sepia(40%) saturate(600%) hue-rotate(90deg);
+}
+
+/* Estiliza o texto do Instagram */
+.footer__social-icon a {
+  color: #ffffff; /* Define a cor branca para o texto */
+  text-decoration: none; /* Garante que o texto comece sem sublinhado */
+  font-size: 16px; /* Aumentou o tamanho da fonte do texto (antes era 14px) */
+  font-weight: 500; /* Define a espessura da fonte como média */
+}
+
+/* Adiciona o sublinhado visível apenas quando o mouse passa por cima do texto */
+.footer__social-icon a:hover {
+  text-decoration: underline; /* Mostra o sublinhado no hover */
+}
+
+/* Títulos e links de navegação */
+.footer__title { 
+  color: #fff; /* Define a cor do texto do título como branco */
+  font-weight: 800; /* Define a fonte como bem grossa (extra-bold) */
+  margin-bottom: 15px; /* Adiciona um espaço abaixo do título */
+  font-size: 16px; /* Define o tamanho da fonte */
+}
+
+.footer__col a { 
+  display: block; /* Transforma o link em bloco para ocupar sua própria linha */
+  color: rgba(233, 247, 240, 0.7); /* Define a cor do texto (verde-claro com 70% de opacidade) */
+  text-decoration: none; /* Remove o sublinhado padrão dos links */
+  margin-bottom: 8px; /* Adiciona um espaçamento abaixo de cada link */
+  font-size: 14px; /* Define o tamanho da fonte */
+  position: relative; /* Define a posição como relativa para servir de âncora para elementos absolutos internos (como o efeito de linha) */
+  transition: color 0.3s ease; /* Adiciona uma transição suave na cor ao passar o mouse */
+  width: fit-content; /* Faz com que a largura do link se ajuste exatamente ao tamanho do texto */
+}
+
+.footer__col a:hover { 
+  color: #00ff9d; /* Altera a cor do texto para verde vibrante ao passar o mouse */
+}
+
+.footer__col a::after {
+  content: ""; /* Cria um elemento vazio para desenhar a linha decorativa */
+  position: absolute; /* Posiciona a linha de forma absoluta em relação ao link */
+  left: 0; /* Alinha a linha no canto esquerdo do link */
+  bottom: -2px; /* Posiciona a linha logo abaixo do texto */
+  width: 0; /* Inicia com largura zero (invisível) */
+  height: 2px; /* Define a espessura da linha */
+  background-color: #00ff9d; /* Define a cor da linha como verde vibrante */
+  transition: width 0.3s ease; /* Cria uma animação suave para a expansão da largura */
+}
+
+.footer__col a:hover::after { 
+  width: 100%; /* Expande a linha para ocupar toda a largura do link ao passar o mouse */
+}
+
+.footer__bottom { 
+  text-align: center; /* Centraliza o texto horizontalmente */
+  margin-top: 50px; /* Adiciona um espaço grande acima da seção inferior */
+  color: rgba(233, 247, 240, 0.3); /* Define a cor do texto com alta transparência (30%) */
+  font-size: 12px; /* Define um tamanho de fonte menor (ideal para rodapés) */
+  border-top: 1px solid #1a1a1a; /* Adiciona uma linha divisória sutil no topo da seção */
+  padding-top: 20px; /* Adiciona um espaçamento interno acima do texto */
+}
+
+/*Responsividade Completa*/
+.menu-toggle { display: none; cursor: pointer; flex-direction: column; gap: 5px; } /* botão do menu hambúrguer: escondido por padrão (desktop), vira "mão" no hover, organiza suas 3 barras em coluna com 5px de espaço entre elas */
+.menu-toggle span { display: block; width: 25px; height: 3px; background: #fff; } /* cada barra do ícone hambúrguer: elemento de bloco, 25px de largura, 3px de altura, cor branca */
+
+.hero__subtitle { 
+  max-width: 480px; /* largura máxima de 480px para o subtítulo do hero */
+  margin-bottom: 30px; /* espaçamento externo de 30px abaixo do subtítulo */
+  line-height: 1.6; /* altura de linha confortável para leitura */
+  color: rgba(233, 247, 240, 0.7); /* cor branco esverdeado com 70% de opacidade */
+  display: block; /* garante comportamento de bloco */
+}
+
+@media (max-width: 900px) { /* regras aplicadas apenas em telas com até 900px de largura (tablets/celulares) */
+  .menu-toggle { display: flex; } /* exibe o botão hambúrguer em telas menores */
+  .nav { display: none; position: absolute; top: 60px; left: 0; width: 100%; background: rgba(5, 6, 7, 0.98); flex-direction: column; padding: 20px; text-align: center; border-bottom: var(--border); gap: 20px; } /* menu de navegação some por padrão no mobile; quando ativo, fica posicionado abaixo do header, ocupando toda a largura, com fundo escuro quase opaco, itens em coluna, centralizados, com padding, borda inferior e espaçamento entre os links */
+  .topbar.active .nav { display: flex; } /* quando o header recebe a classe "active" (via JS, ao clicar no hambúrguer), o menu passa a ser exibido em flexbox */
+  .desktop-only { display: none !important; } /* esconde forçadamente elementos marcados como "somente desktop" nesta faixa de tela */
+  .mobile-buttons { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; } /* botões exclusivos do mobile aparecem em coluna, com espaçamento de 10px entre eles e 10px de margem acima */
+
+  .hero__content--full { align-items: flex-start !important; text-align: left !important; padding-left: 20px; } /* força o conteúdo do hero a ficar alinhado à esquerda no mobile, com padding de 20px */
+  .hero__left { width: 100%; text-align: left; } /* área esquerda do hero ocupa toda a largura disponível, texto alinhado à esquerda */
+  
+  .hero__cta { flex-direction: column; align-items: flex-start; width: 100%; justify-content: flex-start !important; } /* botões de call-to-action empilham em coluna, alinhados à esquerda, ocupando toda a largura */
+  .hero__cta .btn { width: 100%; max-width: 300px; } /* cada botão do CTA ocupa toda a largura disponível, limitado a 300px no máximo */
+
+  .hero__subtitle { max-width: 90%; } /* no mobile, o subtítulo ocupa até 90% da largura da tela */
+  .hero__subtitle br { display: none; } /* remove quebras de linha manuais do subtítulo no mobile, deixando o texto fluir naturalmente */
+  .break-mobile { display: block; } /* elementos com essa classe passam a se comportar como bloco (forçando quebra de linha) no mobile */
+
+  .funcionalidades__grid, 
+  .depoimentos__grid { 
+    display: flex; /* transforma as grades de funcionalidades e depoimentos em flexbox no mobile */
+    flex-direction: column; /* empilha os cards em coluna, um abaixo do outro */
+    gap: 20px; /* espaçamento de 20px entre os cards */
+  }
+  
+  .funcionalidades__grid .card, 
+  .depoimentos__grid .card { 
+    width: 100%; /* cada card ocupa toda a largura disponível no mobile */
+  }
+
+  .funcionalidades__grid .card:nth-child(4),
+  .depoimentos__grid .card:nth-child(4) { 
+    order: 99; /* move o 4º card para o final da lista visualmente, independente da ordem no HTML */
+    width: 100%; /* garante que esse card também ocupe toda a largura */
+  }
+
+  .footer__grid { grid-template-columns: 1fr; gap: 30px; justify-items: start; padding-left: 20px; } /* grade do rodapé passa a ter uma única coluna, com 30px de espaço entre itens, alinhados ao início e padding de 20px à esquerda */
+  .footer__brand { align-items: flex-start; text-align: left; width: 100%; padding-left: 0; } /* bloco de marca do rodapé alinhado à esquerda, ocupando toda a largura, sem padding extra à esquerda */
+  .footer__col { align-items: flex-start; text-align: left; width: 100%; padding-left: 50px; } /* colunas do rodapé alinhadas à esquerda, ocupando toda a largura, com 50px de recuo à esquerda */
+}
+
+@media (max-width: 600px) { /* regras aplicadas apenas em telas de até 600px (celulares menores) */
+  .footer__grid { grid-template-columns: 1fr; padding-left: 20px; } /* reforça uma única coluna no rodapé e mantém 20px de padding à esquerda */
+  .footer__col { padding-left: 50px; } /* mantém o recuo de 50px nas colunas do rodapé nessa faixa de tela também */
+}
+
+@media (min-width: 901px) { /* regras aplicadas apenas em telas a partir de 901px (desktop) */
+  .footer__grid { justify-items: start; padding-left: 20px; } /* no desktop, os itens do grid do rodapé ficam alinhados ao início, com padding de 20px à esquerda */
+  .footer__brand, .footer__col { align-items: flex-start; text-align: left; } /* marca e colunas do rodapé alinhadas à esquerda no desktop */
+  .break-mobile { display: inline; } /* elementos de quebra exclusivos do mobile voltam a se comportar como inline (sem quebrar linha) no desktop */
+  .mobile-only { display: none !important; } /* esconde forçadamente elementos marcados como "somente mobile" no desktop */
+}
+
+/*Botões*/
+.btn { 
+  padding: 12px 24px; border-radius: 50px; cursor: pointer; /* espaçamento interno de 12px vertical e 24px horizontal, cantos totalmente arredondados (formato de pílula), cursor de "mão" */
+  font-weight: 700; border: none; transition: 0.3s; /* texto em negrito, sem borda, transições suaves de 0.3s em qualquer propriedade que mudar */
+  font-size: 14px; display: inline-flex; align-items: center; justify-content: center; /* fonte de 14px, exibido como flexbox inline, com conteúdo centralizado vertical e horizontalmente */
+}
+.btn--primary { background: var(--green); color: #000; } /* variante primária do botão: fundo verde (cor da variável global), texto preto */
+.btn--outline { background: transparent; border: 1px solid var(--green); color: var(--green); } /* variante contornada: fundo transparente, borda verde fina, texto verde */
+.btn--ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.1); } /* variante "fantasma": fundo transparente, texto branco, borda branca bem sutil */
+.btn:hover { opacity: 0.8; transform: translateY(-2px); } /* ao passar o mouse sobre qualquer botão, ele fica levemente transparente (80% de opacidade) e sobe 2px, dando efeito de leve elevação */

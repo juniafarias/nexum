@@ -1,0 +1,272 @@
+/* ===== Hero da página Ferramenta ===== */
+.ferramentaHero {
+  padding: 140px 0 40px;
+  text-align: center;
+}
+
+.ferramentaHero .sectionTag {
+  display: inline-block;
+}
+
+.ferramentaTitle {
+  font-size: 40px;
+  font-weight: 800;
+  margin: 14px 0 16px;
+}
+
+.ferramentaSubtitle {
+  max-width: 620px;
+  margin: 0 auto;
+  color: rgba(233, 247, 240, 0.7);
+  line-height: 1.6;
+}
+
+/* ===== Área principal com os passos ===== */
+.ferramentaApp {
+  padding-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 820px;
+}
+
+.ferramentaCard {
+  padding: 32px;
+  border-radius: var(--radius);
+  border: var(--border);
+  background: var(--bg-card);
+  transition: opacity 0.3s ease;
+}
+
+.ferramentaCard--disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.ferramentaStep {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.stepNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #000;
+  font-weight: 800;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.stepTitle {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* ===== Passo 1: tipos de documento ===== */
+.tipoGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.tipoCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 12px;
+  border-radius: 14px;
+  border: var(--border);
+  background: rgba(255, 255, 255, 0.02);
+  color: #e9f7f0;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.tipoCard:hover {
+  transform: translateY(-3px);
+  border-color: var(--green);
+}
+
+.tipoCard.tipoCard--ativo {
+  border-color: var(--green);
+  background: rgba(18, 247, 162, 0.08);
+}
+
+.tipoIcon { font-size: 26px; }
+.tipoNome { font-size: 13px; font-weight: 600; text-align: center; }
+
+@media (max-width: 700px) {
+  .tipoGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ===== Passo 2: upload ===== */
+.uploadArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 40px 20px;
+  border: 1.5px dashed rgba(18, 247, 162, 0.35);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  text-align: center;
+}
+
+.uploadArea:hover {
+  border-color: var(--green);
+  background: rgba(18, 247, 162, 0.04);
+}
+
+.uploadIcon { font-size: 30px; }
+.uploadTexto { font-size: 14px; color: rgba(233, 247, 240, 0.85); }
+.uploadLink { color: var(--green); font-weight: 600; }
+.uploadFormatos { font-size: 12px; color: rgba(233, 247, 240, 0.5); }
+
+.uploadArquivo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  border: var(--border);
+  background: rgba(18, 247, 162, 0.05);
+}
+
+.uploadArquivoIcon { font-size: 20px; }
+.uploadArquivoNome { flex: 1; font-size: 14px; word-break: break-all; }
+.uploadArquivoRemover {
+  background: none;
+  border: none;
+  color: rgba(233, 247, 240, 0.6);
+  font-size: 16px;
+  cursor: pointer;
+}
+.uploadArquivoRemover:hover { color: #fff; }
+
+.ferramentaBtn {
+  width: 100%;
+  margin-top: 18px;
+  justify-content: center;
+}
+
+.ferramentaBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.ferramentaAviso {
+  margin-top: 12px;
+  font-size: 12px;
+  text-align: center;
+  color: rgba(233, 247, 240, 0.45);
+}
+
+/* ===== Loading ===== */
+.ferramentaLoading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 50px 20px;
+}
+
+.loadingSpinner {
+  width: 34px;
+  height: 34px;
+  border: 3px solid rgba(18, 247, 162, 0.2);
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+  to { transform: rotate(360deg); }
+}
+
+.loadingTexto {
+  font-size: 14px;
+  color: rgba(233, 247, 240, 0.7);
+}
+
+/* ===== Passo 3: resultado ===== */
+.resultadoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.resultadoBloco {
+  padding: 20px;
+  border-radius: 14px;
+  border: var(--border);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.resultadoBloco--acao {
+  border-color: rgba(18, 247, 162, 0.3);
+}
+
+.resultadoBlocoHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.resultadoBlocoIcon { font-size: 18px; }
+
+.resultadoBlocoHeader h3 { font-size: 15px; font-weight: 700; }
+
+.resultadoLista {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.resultadoLista li {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(233, 247, 240, 0.85);
+  padding-left: 18px;
+  position: relative;
+}
+
+.resultadoLista li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--green);
+}
+
+.lembreteBox {
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 12px;
+  background: rgba(18, 247, 162, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.lembreteIcon { font-size: 18px; }
+.lembreteTitulo { font-size: 13px; font-weight: 700; }
+.lembreteTexto { font-size: 13px; color: rgba(233, 247, 240, 0.75); }
+.lembreteBtn { width: 100%; justify-content: center; margin-top: 4px; }
+
+@media (max-width: 700px) {
+  .resultadoGrid { grid-template-columns: 1fr; }
+}

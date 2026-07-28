@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexum | Cadastro</title>
+  <link rel="icon" href="../img/favicon-96x96.png" type="image/png" />
+  <link rel="stylesheet" href="cadastro.css">
+  <!-- Font Awesome: ícones (câmera, usuário, e-mail, olho, check) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+  <main class="card">
+    <!-- Cabeçalho: logo + link de login -->
+    <header class="card-header">
+      <img src="../img/logo.png" alt="Nexum" class="logo">
+      <p class="login-link">Já tem uma conta? <a href="../login/login.html">Entrar</a></p>
+    </header>
+
+    <h1 class="title-center">Cadastre-se na Nexum!</h1>
+
+    <form id="cadastroForm" novalidate>
+
+      <!-- Upload de foto -->
+      <div class="photo-upload">
+        <div class="photo-circle" id="photoCircle">
+          <i class="fa-solid fa-camera" id="cameraIcon"></i>
+          <button type="button" class="photo-remove" id="photoRemove" title="Remover imagem">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+        <input type="file" id="fotoInput" name="foto" accept="image/*" hidden>
+        <label for="fotoInput" class="photo-label" id="photoLabel">Clique para adicionar imagem no seu perfil(ela será exibida para outros usuários).</label>
+      </div>
+
+      <!-- Nome completo -->
+      <div class="input-group">
+        <label for="nome">Nome completo</label>
+        <div class="wrapper-input">
+          <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo">
+          <i class="fa-solid fa-user input-icon"></i>
+        </div>
+        <span class="error-message" id="error-nome"></span>
+      </div>
+
+      <!-- Email -->
+      <div class="input-group">
+        <label for="email">E-mail</label>
+        <div class="wrapper-input">
+          <input type="email" id="email" name="email" placeholder="Digite seu e-mail">
+          <i class="fa-solid fa-envelope input-icon"></i>
+        </div>
+        <span class="helper-text">Preencha com o e-mail que você mais utiliza.</span>
+        <span class="error-message" id="error-email"></span>
+      </div>
+
+      <!-- Senha -->
+      <div class="input-group">
+        <label for="senha">Senha</label>
+        <div class="wrapper-input">
+          <input type="password" id="senha" name="senha" placeholder="Crie sua senha">
+          <i class="fa-regular fa-eye toggle-password" data-target="senha"></i>
+        </div>
+
+        <div class="password-rules">
+          <p class="rules-title">Sua senha deve ser forte:</p>
+          <ul id="rules-list">
+            <li id="rule-length"><i class="fa-solid fa-circle-check"></i> Mínimo de 8 caracteres</li>
+            <li id="rule-upper"><i class="fa-solid fa-circle-check"></i> Pelo menos uma letra maiúscula</li>
+            <li id="rule-lower"><i class="fa-solid fa-circle-check"></i> Pelo menos uma letra minúscula</li>
+            <li id="rule-number"><i class="fa-solid fa-circle-check"></i> Pelo menos um número</li>
+            <li id="rule-special"><i class="fa-solid fa-circle-check"></i> Pelo menos um caractere especial (!@#$%&*)</li>
+          </ul>
+        </div>
+        <span class="error-message" id="error-senha"></span>
+      </div>
+
+      <!-- Confirmar senha -->
+      <div class="input-group">
+        <label for="confirmarSenha">Confirmar senha</label>
+        <div class="wrapper-input">
+          <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Confirme sua senha">
+          <i class="fa-regular fa-eye toggle-password" data-target="confirmarSenha"></i>
+        </div>
+        <span class="helper-text">Preencha com a mesma senha criada no campo "Senha".</span>
+        <span class="error-message" id="error-confirmarSenha"></span>
+      </div>
+
+      <div class="botao-wrapper">
+        <button type="submit" id="botaoCriar">Criar conta</button>
+        <span class="botao-tooltip" id="botaoTooltip">Você precisa preencher os campos acima corretamente para conseguir criar uma conta.</span>
+      </div>
+    </form>
+  </main>
+
+  <!-- Pop-up de sucesso -->
+  <div id="custom-popup" class="popup-overlay">
+    <div class="popup-content">
+      <i class="fa-solid fa-circle-check" id="popup-icon"></i>
+      <h3>Conta criada com sucesso!</h3>
+      <p>Agora você já pode entrar na sua conta Nexum.</p>
+      <button type="button" onclick="closePopup()">Ok</button>
+    </div>
+  </div>
+
+  <script src="cadastro.js"></script>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!-- Declara que este documento é HTML5 -->
+<!doctype html>
+<!-- Abre a tag raiz do documento, definindo o idioma como português do Brasil -->
+<html lang="pt-BR">
+<!-- Início do cabeçalho do documento (metadados, não visível na página) -->
+<head>
+  <!-- Define a codificação de caracteres como UTF-8 (suporta acentos, ç, etc.) -->
+  <meta charset="utf-8" />
+  <!-- Configura a viewport para tornar o site responsivo em dispositivos móveis -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Título que aparece na aba do navegador -->
+  <title>Nexum | Suporte</title>
+  <!-- Define o ícone (favicon) que aparece na aba do navegador -->
+  <link rel="icon" href="../img/favicon-96x96.png" type="image/png" />
+  <!-- Importa o CSS global do site (compartilhado entre todas as páginas) -->
+  <link rel="stylesheet" href="../style.css" />
+  <!-- Importa o CSS específico desta página de suporte -->
+  <link rel="stylesheet" href="suporte.css" />
+  <!-- Importa a biblioteca de ícones Font Awesome via CDN (usada no ícone do pop-up) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<!-- Fim do cabeçalho -->
+</head>
+<!-- Início do corpo visível da página -->
+<body>
+
+  <!-- Cabeçalho fixo do site, com id usado pelo JS para efeitos de rolagem -->
+  <header class="topbar" id="mainHeader">
+    <!-- Container interno que centraliza e limita a largura do conteúdo do header -->
+    <div class="container topbar__inner">
+      <!-- Logo da marca Nexum -->
+      <img class="brand__logo" src="../img/logo.png" alt="Nexum" />
+
+      <!-- Botão "hambúrguer" que abre o menu no modo mobile -->
+      <div class="menu-toggle" id="menuToggle">
+        <!-- Primeira linha do ícone do menu hambúrguer -->
+        <span></span>
+        <!-- Segunda linha do ícone do menu hambúrguer -->
+        <span></span>
+        <!-- Terceira linha do ícone do menu hambúrguer -->
+        <span></span>
+      </div>
+
+      <!-- Menu de navegação principal do site -->
+      <nav class="nav">
+        <!-- Link para a página inicial -->
+        <a href="../index.html" class="nav__link">Início</a>
+        <!-- Link para a página da ferramenta -->
+        <a href="../ferramenta/ferramenta.html" class="nav__link">Ferramenta</a>
+        <!-- Link para a página de planos -->
+        <a href="../planos/planos.html" class="nav__link">Planos</a>
+        <!-- Link para a página sobre nós -->
+        <a href="../sobrenos/sobrenos.html" class="nav__link">Sobre Nós</a>
+        <!-- Link para a própria página de suporte (página atual) -->
+        <a href="../suporte/suporte.html" class="nav__link">Suporte</a>
+
+        <!-- Bloco de botões (Entrar/Criar Conta) visível apenas no modo mobile, dentro do menu -->
+        <div class="mobile-only mobile-buttons">
+          <!-- Link que abre a página de login em uma nova aba -->
+          <a href="../login/login.html" target="_blank" rel="noopener noreferrer">
+  <!-- Botão estilizado "Entrar" (estilo secundário/ghost) -->
+  <button class="btn btn--ghost">Entrar</button>
+</a>
+<!-- Link que abre a página de cadastro em uma nova aba -->
+<a href="../cadastrar/cadastro.html" target="_blank" rel="noopener noreferrer">
+  <!-- Botão estilizado "Criar Conta" (estilo primário/destaque) -->
+  <button class="btn btn--primary">Criar Conta</button>
+</a>
+        </div>
+      </nav>
+
+      <!-- Bloco de botões (Entrar/Criar Conta) visível apenas no modo desktop -->
+      <div class="topbar__actions desktop-only">
+        <!-- Link para a página de login (mesma aba) -->
+        <a href="../login/login.html">
+          <!-- Botão "Entrar" no modo desktop -->
+          <button class="btn btn--ghost">Entrar</button>
+        </a>
+        <!-- Link para a página de cadastro (mesma aba) -->
+        <a href="../cadastrar/cadastro.html">
+          <!-- Botão "Criar Conta" no modo desktop -->
+          <button class="btn btn--primary">Criar Conta</button>
+        </a>
+      </div>
+    <!-- Fecha o container interno do header -->
+    </div>
+  <!-- Fecha o header -->
+  </header>
+
+  <!-- Conteúdo principal da página -->
+  <main>
+    <!-- Seção "hero" da página de suporte, com o fundo em imagem -->
+    <section class="suporte-hero">
+      <!-- Container que centraliza e limita a largura do conteúdo -->
+      <div class="container">
+        <!-- Wrapper que divide a seção em duas colunas (imagem + formulário) -->
+        <div class="suporte-split">
+
+          <!-- Lado esquerdo: imagem/identidade visual -->
+          <!-- Coluna esquerda com o GIF de fundo (identidade visual/Nathan) -->
+          <div class="suporte-info">
+            <!-- Camada escura sobreposta à imagem, para dar legibilidade ao texto -->
+            <div class="suporte-info__overlay">
+              <!-- Etiqueta pequena indicando a seção atual -->
+              <span class="sectionTag">SUPORTE</span>
+              <!-- Título principal da seção -->
+              <h1>Tire as suas dúvidas conosco!</h1>
+            <!-- Fecha a camada de overlay -->
+            </div>
+          <!-- Fecha a coluna de identidade visual -->
+          </div>
+
+          <!-- Lado direito: formulário de contato -->
+          <!-- Coluna direita contendo o formulário de contato -->
+          <div class="suporte-form">
+            <!-- Subtítulo/pergunta que introduz o formulário -->
+            <h2>Problemas com o site ou com a ferramenta?</h2>
+            <!-- Texto complementar explicando o que acontece ao enviar -->
+            <p class="suporte-form__subtitle">Envie-os para gente e receba a ajuda do Nathan.</p>
+
+            <!-- Formulário de suporte; "novalidate" desativa a validação nativa do navegador (a validação é feita via JS) -->
+            <form id="suporteForm" novalidate>
+              <!-- Grade com os quatro primeiros campos, lado a lado em telas largas -->
+              <div class="grid-inputs">
+                <!-- Grupo do campo Nome -->
+                <div class="input-group">
+                  <!-- Rótulo do campo de nome, associado via "for" -->
+                  <label for="nome">Nome</label>
+                  <!-- Campo de texto para o nome completo -->
+                  <input type="text" id="nome" placeholder="Digite seu nome completo">
+                  <!-- Espaço reservado onde a mensagem de erro do nome será exibida -->
+                  <span id="error-nome" class="error-message"></span>
+                <!-- Fecha o grupo do campo Nome -->
+                </div>
+
+                <!-- Grupo do campo E-mail -->
+                <div class="input-group">
+                  <!-- Rótulo do campo de e-mail -->
+                  <label for="email">E-mail</label>
+                  <!-- Campo de texto para o e-mail -->
+                  <input type="text" id="email" placeholder="Exemplo: nome@dominio.com">
+                  <!-- Espaço reservado para a mensagem de erro do e-mail -->
+                  <span id="error-email" class="error-message"></span>
+                <!-- Fecha o grupo do campo E-mail -->
+                </div>
+
+                <!-- Grupo do campo Celular/WhatsApp -->
+                <div class="input-group">
+                  <!-- Rótulo do campo de telefone -->
+                  <label for="numero">Celular/WhatsApp</label>
+                  <!-- Campo de texto para o número de telefone -->
+                  <input type="text" id="numero" placeholder="(xx) xxxxx-xxxx">
+                  <!-- Espaço reservado para a mensagem de erro do telefone -->
+                  <span id="error-numero" class="error-message"></span>
+                <!-- Fecha o grupo do campo Celular/WhatsApp -->
+                </div>
+
+                <!-- Grupo do campo Assunto -->
+                <div class="input-group">
+                  <!-- Rótulo do campo de assunto -->
+                  <label for="assunto">Assunto</label>
+                  <!-- Menu suspenso (select) com as opções de assunto -->
+                  <select id="assunto">
+                    <!-- Opção padrão desabilitada, apenas instrutiva -->
+                    <option value="" disabled selected>Escolha um assunto</option>
+                    <!-- Opção: dúvidas sobre um documento -->
+                    <option value="documento">Dúvidas sobre um documento</option>
+                    <!-- Opção: problemas técnicos no site -->
+                    <option value="tecnico">Problemas técnicos no site</option>
+                    <!-- Opção: dúvidas sobre os planos -->
+                    <option value="plano">Dúvidas sobre os Nossos Planos</option>
+                    <!-- Opção: qualquer outro assunto -->
+                    <option value="outro">Outro assunto</option>
+                  <!-- Fecha o select -->
+                  </select>
+                  <!-- Espaço reservado para a mensagem de erro do assunto -->
+                  <span id="error-assunto" class="error-message"></span>
+                <!-- Fecha o grupo do campo Assunto -->
+                </div>
+              <!-- Fecha a grade dos quatro campos -->
+              </div>
+
+              <!-- Grupo do campo Mensagem, ocupando a largura total do formulário -->
+              <div class="input-group full-width">
+                <!-- Rótulo do campo de mensagem -->
+                <label for="msg">Mensagem</label>
+                <!-- Área de texto multilinha para a mensagem do usuário -->
+                <textarea id="msg" rows="4" placeholder="Exemplo: Tenho dúvidas sobre..."></textarea>
+                <!-- Espaço reservado para a mensagem de erro da mensagem -->
+                <span id="error-msg" class="error-message"></span>
+              <!-- Fecha o grupo do campo Mensagem -->
+              </div>
+
+              <!-- Grupo com os botões de ação do formulário -->
+              <div class="button-group">
+                <!-- Botão de envio do formulário -->
+                <button type="submit" class="btn btn--primary">Enviar Mensagem</button>
+                <!-- Botão para limpar todos os campos do formulário -->
+                <button type="reset" class="btn btn--ghost">Limpar</button>
+              <!-- Fecha o grupo de botões -->
+              </div>
+            <!-- Fecha o formulário -->
+            </form>
+          <!-- Fecha a coluna do formulário -->
+          </div>
+
+        <!-- Fecha o wrapper de duas colunas -->
+        </div>
+      <!-- Fecha o container da seção -->
+      </div>
+    <!-- Fecha a seção hero -->
+    </section>
+  <!-- Fecha o conteúdo principal -->
+  </main>
+
+  <!-- Pop-up de sucesso -->
+  <!-- Camada de fundo escurecido do pop-up de sucesso (fica escondida até receber a classe "active" via JS) -->
+  <div id="success-popup" class="popup-overlay">
+    <!-- Caixa central do pop-up com o conteúdo de confirmação -->
+    <div class="popup-content">
+      <!-- Ícone de "check" (sucesso) vindo do Font Awesome -->
+      <i class="fa-solid fa-circle-check" id="popup-icon"></i>
+      <!-- Título de confirmação do pop-up -->
+      <h3>Recebemos as Suas Dúvidas!</h3>
+      <!-- Texto explicando os próximos passos -->
+      <p>O Nathan entrará em Contato Pelo WhatsApp e E-mail Fornecido!</p>
+      <!-- Botão para fechar o pop-up manualmente -->
+      <button id="close-popup" type="button">Entendido</button>
+    <!-- Fecha a caixa de conteúdo do pop-up -->
+    </div>
+  <!-- Fecha a camada de fundo do pop-up -->
+  </div>
+
+  <!-- Rodapé do site -->
+  <footer class="footer">
+    <!-- Container em grade com as colunas do rodapé -->
+    <div class="container footer__grid">
+
+      <!-- Coluna com a marca/identidade do rodapé -->
+      <div class="footer__brand">
+        <!-- Logo da Nexum no rodapé -->
+        <img class="footer__logo" src="../img/logo.png" alt="Nexum">
+        <!-- Slogan/tagline da marca -->
+        <p class="footer__tagline">"Simplificando o mundo para você."</p>
+        <!-- Bloco com o ícone e link das redes sociais -->
+        <div class="footer__social-icon">
+          <!-- Ícone do Instagram -->
+          <img src="../img/insta.png" alt="Instagram">
+  <!-- Link para o perfil do Instagram, abrindo em nova aba -->
+  <a href="https://instagram.com/contatenexum" target="_blank" rel="noopener noreferrer">@contatenexum</a>
+        <!-- Fecha o bloco de redes sociais -->
+        </div>
+      <!-- Fecha a coluna da marca -->
+      </div>
+      <!-- Coluna de navegação do rodapé -->
+      <div class="footer__col">
+        <!-- Título da coluna de navegação -->
+        <div class="footer__title">Navegação</div>
+        <!-- Link para a página inicial -->
+        <a href="../index.html">Início</a>
+        <!-- Link para a página da ferramenta -->
+        <a href="../ferramenta/ferramenta.html">Ferramenta</a>
+        <!-- Link para a página de planos -->
+        <a href="../planos/planos.html">Planos</a>
+        <!-- Link para a página sobre nós -->
+        <a href="../sobrenos/sobrenos.html">Sobre Nós</a>
+        <!-- Link para a página de suporte -->
+        <a href="../suporte/suporte.html">Suporte</a>
+      <!-- Fecha a coluna de navegação -->
+      </div>
+      <!-- Coluna de contato do rodapé -->
+      <div class="footer__col">
+        <!-- Título da coluna de contato -->
+        <div class="footer__title">Contato</div>
+        <!-- E-mail de contato exibido -->
+        <p>✉ contatenexum@gmail.com</p>
+      <!-- Fecha a coluna de contato -->
+      </div>
+    <!-- Fecha a grade do rodapé -->
+    </div>
+    <!-- Linha de copyright na parte inferior do rodapé -->
+    <div class="footer__bottom">© 2026 Nexum. Todos os direitos reservados.</div>
+  <!-- Fecha o rodapé -->
+  </footer>
+
+  <!-- Importa o script global do site (compartilhado entre páginas) -->
+  <script src="../script.js"></script>
+  <!-- Importa o script específico da página de suporte (validação do formulário e pop-up) -->
+  <script src="suporte.js"></script>
+<!-- Fecha o corpo do documento -->
+</body>
+<!-- Fecha o documento HTML -->
+</html>
