@@ -59,30 +59,23 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .planCard {
   position: relative;
-  background: rgba(5, 6, 7, 0.55);
-  border: var(--border);
+  background: rgba(8, 10, 10, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius);
   padding: 34px 30px 30px;
   display: flex;
   flex-direction: column;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
   transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .planCard:hover {
   transform: translateY(-4px);
   border-color: var(--green);
-}
-
-.planCard--featured {
-  border-color: var(--green);
-  box-shadow: 0 0 40px rgba(18, 247, 162, 0.25);
 }
 
 .planCard__badge {
@@ -131,13 +124,15 @@
   line-height: 1.5;
   margin-bottom: 22px;
   min-height: 62px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .planCard__includeLabel {
   font-size: 14px;
   font-weight: 700;
   color: #fff;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .planCard__list {
@@ -161,22 +156,24 @@
   content: "";
   position: absolute;
   left: 0;
-  top: 2px;
-  width: 17px;
-  height: 17px;
+  top: 1px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   border: 1.5px solid var(--green);
   background: radial-gradient(circle, rgba(18,247,162,0.15) 0%, transparent 70%);
 }
 
 .planCard__list li::after {
-  content: "✓";
+  content: "";
   position: absolute;
-  left: 3px;
-  top: 0px;
-  font-size: 11px;
-  font-weight: 800;
-  color: var(--green);
+  left: 5px;
+  top: 6px;
+  width: 8px;
+  height: 4px;
+  border-left: 2px solid var(--green);
+  border-bottom: 2px solid var(--green);
+  transform: rotate(-45deg);
 }
 
 .planCard__btn {
@@ -196,7 +193,6 @@
 .planCard__btn--primary {
   background: var(--green);
   color: #000;
-  box-shadow: 0 0 22px rgba(18, 247, 162, 0.45);
 }
 
 /* --- Responsividade --- */

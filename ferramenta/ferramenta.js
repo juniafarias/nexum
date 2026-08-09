@@ -1,81 +1,100 @@
 document.addEventListener("DOMContentLoaded", function () {
 
   // ===== Dados de exemplo (mock) para cada tipo de documento =====
-  // Em uma versão com back-end, isso viria da IA que processa o arquivo real.
+  // Em uma versão com back-end, isso viria da IA que processa o arquivo/texto real.
   const exemplos = {
-    aluguel: {
-      resumo: [
-        "Este é um contrato de aluguel de imóvel residencial com duração de 30 meses.",
-        "O valor do aluguel é reajustado uma vez por ano pelo índice IGP-M.",
-        "Há uma multa caso você queira sair do contrato antes do prazo combinado.",
-        "Você é responsável por pequenos consertos; consertos estruturais são do proprietário."
-      ],
-      acao: [
-        "Guarde uma cópia assinada do contrato em local seguro.",
-        "Anote a data de vencimento do aluguel todo mês.",
-        "Avise o proprietário com antecedência caso queira encerrar o contrato."
-      ],
-      lembrete: "Vencimento do aluguel: todo dia 5 do mês."
+    contrato: {
+      descricao: "Contrato de prestação de serviços com vigência de 12 meses.",
+      valor: "R$ 450,00 por mês",
+      vencimento: "05/09/2026",
+      vencimentoTitulo: "Próximo pagamento",
+      acao: "Revise a cláusula de rescisão e o prazo de aviso antes de assinar.",
+      lembrete: "Avisaremos antes da renovação automática."
     },
     laudo: {
-      resumo: [
-        "O exame indicou um resultado dentro da faixa considerada normal.",
-        "Foi identificado um pequeno ponto de atenção que não é urgente.",
-        "O médico recomenda repetir o exame em alguns meses para acompanhar."
-      ],
-      acao: [
-        "Leve este resumo na sua próxima consulta.",
-        "Agende o exame de acompanhamento indicado pelo médico.",
-        "Caso sinta algum sintoma novo, procure atendimento antes da data marcada."
-      ],
-      lembrete: "Refazer exame de acompanhamento em 3 meses."
+      descricao: "Exame com resultados dentro da faixa considerada normal, com um ponto de atenção leve.",
+      valor: null,
+      vencimento: "Repetir em 3 meses",
+      vencimentoTitulo: "Acompanhamento",
+      acao: "Leve este resumo à sua próxima consulta médica.",
+      lembrete: "Avisaremos antes do exame de acompanhamento."
     },
     boleto: {
-      resumo: [
-        "Esta conta se refere ao consumo do mês anterior, não do mês atual.",
-        "O valor inclui uma taxa de serviço além do consumo.",
-        "Pagando após o vencimento, incide multa e juros por dia de atraso."
-      ],
-      acao: [
-        "Confira se o valor está de acordo com o consumo do período.",
-        "Pague até a data de vencimento para evitar multa.",
-        "Guarde o comprovante de pagamento por segurança."
-      ],
-      lembrete: "Vencimento da conta em 5 dias."
+      descricao: "Fatura de serviço referente ao mês atual.",
+      valor: "R$ 129,90",
+      vencimento: "10/09/2026",
+      vencimentoTitulo: "Vencimento",
+      acao: "Pague até a data de vencimento para evitar multa e juros.",
+      lembrete: "Avisaremos antes do vencimento."
     },
-    edital: {
-      resumo: [
-        "Este edital abre inscrições para um processo seletivo com vagas limitadas.",
-        "As inscrições precisam ser feitas apenas pelo site indicado, dentro do prazo.",
-        "É necessário enviar documentos digitalizados junto com a inscrição."
-      ],
-      acao: [
-        "Separe os documentos pedidos antes de começar a inscrição.",
-        "Faça a inscrição com alguns dias de antecedência do prazo final.",
-        "Guarde o comprovante de inscrição gerado pelo site."
-      ],
-      lembrete: "Prazo final das inscrições se aproximando."
+    juridico: {
+      descricao: "Notificação extrajudicial sobre uma pendência contratual.",
+      valor: null,
+      vencimento: "Prazo de resposta: 15 dias",
+      vencimentoTitulo: "Prazo",
+      acao: "Responda dentro do prazo indicado ou procure orientação jurídica.",
+      lembrete: "Avisaremos antes do prazo terminar."
+    },
+    publico: {
+      descricao: "Edital de processo seletivo com vagas limitadas.",
+      valor: null,
+      vencimento: "Inscrições até 20/09/2026",
+      vencimentoTitulo: "Prazo de inscrição",
+      acao: "Separe os documentos exigidos e se inscreva pelo site oficial.",
+      lembrete: "Avisaremos antes do fim das inscrições."
+    },
+    correspondencia: {
+      descricao: "Comunicado informando uma alteração nos seus dados de cobrança.",
+      valor: null,
+      vencimento: null,
+      vencimentoTitulo: "Vencimento",
+      acao: "Confira se os dados informados estão corretos e guarde este aviso.",
+      lembrete: null
+    },
+    outro: {
+      descricao: "Documento enviado para uma análise geral do conteúdo.",
+      valor: null,
+      vencimento: null,
+      vencimentoTitulo: "Vencimento",
+      acao: "Leia com atenção e guarde uma cópia para referência futura.",
+      lembrete: null
     }
   };
 
   const tipoGrid = document.getElementById("tipoGrid");
-  const passoUpload = document.getElementById("passoUpload");
+  const tabArquivo = document.getElementById("tabArquivo");
+  const tabTexto = document.getElementById("tabTexto");
+  const painelArquivo = document.getElementById("painelArquivo");
+  const painelTexto = document.getElementById("painelTexto");
+
   const uploadArea = document.getElementById("uploadArea");
   const fileInput = document.getElementById("fileInput");
   const uploadArquivo = document.getElementById("uploadArquivo");
   const uploadArquivoNome = document.getElementById("uploadArquivoNome");
   const uploadArquivoRemover = document.getElementById("uploadArquivoRemover");
-  const btnSimplificar = document.getElementById("btnSimplificar");
-  const passoLoading = document.getElementById("passoLoading");
-  const passoResultado = document.getElementById("passoResultado");
-  const resumoLista = document.getElementById("resumoLista");
-  const acaoLista = document.getElementById("acaoLista");
+  const textoArea = document.getElementById("textoArea");
+
+  const btnContinuar = document.getElementById("btnContinuar");
+  const loadingOverlay = document.getElementById("loadingOverlay");
+
+  const modalOverlay = document.getElementById("modalOverlay");
+  const resultClose = document.getElementById("resultClose");
+  const resultArquivoIcon = document.getElementById("resultArquivoIcon");
+  const resultArquivoNome = document.getElementById("resultArquivoNome");
+  const resultDescricao = document.getElementById("resultDescricao");
+  const linhaValor = document.getElementById("linhaValor");
+  const resultValor = document.getElementById("resultValor");
+  const linhaVencimento = document.getElementById("linhaVencimento");
+  const resultVencimento = document.getElementById("resultVencimento");
+  const resultVencimentoTitulo = document.getElementById("resultVencimentoTitulo");
+  const resultAcao = document.getElementById("resultAcao");
   const lembreteBox = document.getElementById("lembreteBox");
   const lembreteTexto = document.getElementById("lembreteTexto");
-  const btnLembrete = document.getElementById("btnLembrete");
   const btnNovoDocumento = document.getElementById("btnNovoDocumento");
 
   let tipoSelecionado = null;
+  let modoEnvio = "arquivo"; // "arquivo" ou "texto"
+  let arquivoSelecionado = null;
 
   // ===== Passo 1: escolher o tipo de documento =====
   tipoGrid.addEventListener("click", function (e) {
@@ -86,18 +105,33 @@ document.addEventListener("DOMContentLoaded", function () {
     card.classList.add("tipoCard--ativo");
 
     tipoSelecionado = card.dataset.tipo;
-    passoUpload.classList.remove("ferramentaCard--disabled");
-    passoUpload.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    atualizarBotaoContinuar();
   });
 
-  // ===== Passo 2: upload do arquivo (simulado) =====
+  // ===== Alternar entre "Enviar arquivo" e "Colar texto" =====
+  function selecionarModo(modo) {
+    modoEnvio = modo;
+
+    tabArquivo.classList.toggle("enviarCard--ativo", modo === "arquivo");
+    tabTexto.classList.toggle("enviarCard--ativo", modo === "texto");
+
+    painelArquivo.hidden = modo !== "arquivo";
+    painelTexto.hidden = modo !== "texto";
+
+    atualizarBotaoContinuar();
+  }
+
+  tabArquivo.addEventListener("click", () => selecionarModo("arquivo"));
+  tabTexto.addEventListener("click", () => selecionarModo("texto"));
+
+  // ===== Upload de arquivo =====
   uploadArea.addEventListener("click", function () {
     fileInput.click();
   });
 
   fileInput.addEventListener("change", function () {
     if (fileInput.files.length > 0) {
-      mostrarArquivo(fileInput.files[0].name);
+      mostrarArquivo(fileInput.files[0]);
     }
   });
 
@@ -118,56 +152,84 @@ document.addEventListener("DOMContentLoaded", function () {
   uploadArea.addEventListener("drop", function (e) {
     const arquivos = e.dataTransfer.files;
     if (arquivos.length > 0) {
-      mostrarArquivo(arquivos[0].name);
+      mostrarArquivo(arquivos[0]);
     }
   });
 
-  function mostrarArquivo(nome) {
-    uploadArquivoNome.textContent = nome;
+  function mostrarArquivo(arquivo) {
+    arquivoSelecionado = arquivo;
+    uploadArquivoNome.textContent = arquivo.name;
     uploadArea.hidden = true;
     uploadArquivo.hidden = false;
-    btnSimplificar.disabled = false;
+    atualizarBotaoContinuar();
   }
 
   uploadArquivoRemover.addEventListener("click", function () {
+    arquivoSelecionado = null;
     fileInput.value = "";
     uploadArea.hidden = false;
     uploadArquivo.hidden = true;
-    btnSimplificar.disabled = true;
+    atualizarBotaoContinuar();
   });
 
-  // ===== Passo 3: gerar o resultado (simulado) =====
-  btnSimplificar.addEventListener("click", function () {
-    if (!tipoSelecionado) return;
+  // ===== Colar texto =====
+  textoArea.addEventListener("input", atualizarBotaoContinuar);
 
-    passoUpload.hidden = true;
-    passoLoading.hidden = false;
+  // ===== Habilita/desabilita o botão Continuar =====
+  function atualizarBotaoContinuar() {
+    const temEnvio = modoEnvio === "arquivo"
+      ? !!arquivoSelecionado
+      : textoArea.value.trim().length > 0;
 
-    // Simula o tempo de processamento da IA
+    btnContinuar.disabled = !temEnvio;
+  }
+
+  // ===== Clique em Continuar: mostra loading e depois o pop-up =====
+  btnContinuar.addEventListener("click", function () {
+    if (btnContinuar.disabled) return;
+
+    loadingOverlay.hidden = false;
+
     setTimeout(function () {
-      exibirResultado(tipoSelecionado);
-      passoLoading.hidden = true;
-      passoResultado.hidden = false;
-      passoResultado.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 1400);
+      abrirResultado();
+      loadingOverlay.hidden = true;
+    }, 1300);
   });
 
-  function exibirResultado(tipo) {
-    const dados = exemplos[tipo];
+  function abrirResultado() {
+    const dados = exemplos[tipoSelecionado] || exemplos.outro;
 
-    resumoLista.innerHTML = "";
-    dados.resumo.forEach(item => {
-      const li = document.createElement("li");
-      li.textContent = item;
-      resumoLista.appendChild(li);
-    });
+    // Nome/ícone do "arquivo" analisado, de acordo com o que o usuário enviou
+    if (modoEnvio === "arquivo" && arquivoSelecionado) {
+      const nome = arquivoSelecionado.name;
+      const extensao = nome.split(".").pop().toUpperCase();
+      resultArquivoIcon.textContent = extensao.length <= 4 ? extensao : "DOC";
+      resultArquivoNome.textContent = nome;
+    } else {
+      const texto = textoArea.value.trim();
+      const previa = texto.length > 28 ? texto.slice(0, 28) + "…" : texto;
+      resultArquivoIcon.textContent = "TXT";
+      resultArquivoNome.textContent = previa || "Texto colado";
+    }
 
-    acaoLista.innerHTML = "";
-    dados.acao.forEach(item => {
-      const li = document.createElement("li");
-      li.textContent = item;
-      acaoLista.appendChild(li);
-    });
+    resultDescricao.textContent = dados.descricao;
+
+    if (dados.valor) {
+      resultValor.textContent = dados.valor;
+      linhaValor.hidden = false;
+    } else {
+      linhaValor.hidden = true;
+    }
+
+    if (dados.vencimento) {
+      resultVencimentoTitulo.textContent = dados.vencimentoTitulo || "Vencimento";
+      resultVencimento.textContent = dados.vencimento;
+      linhaVencimento.hidden = false;
+    } else {
+      linhaVencimento.hidden = true;
+    }
+
+    resultAcao.textContent = dados.acao;
 
     if (dados.lembrete) {
       lembreteTexto.textContent = dados.lembrete;
@@ -175,29 +237,38 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       lembreteBox.hidden = true;
     }
+
+    modalOverlay.hidden = false;
   }
 
-  btnLembrete.addEventListener("click", function () {
-    btnLembrete.textContent = "Adicionado ✓";
-    btnLembrete.disabled = true;
+  function fecharResultado() {
+    modalOverlay.hidden = true;
+  }
+
+  resultClose.addEventListener("click", fecharResultado);
+  modalOverlay.addEventListener("click", function (e) {
+    if (e.target === modalOverlay) fecharResultado();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !modalOverlay.hidden) fecharResultado();
   });
 
   // ===== Recomeçar =====
   btnNovoDocumento.addEventListener("click", function () {
+    fecharResultado();
+
     tipoSelecionado = null;
     tipoGrid.querySelectorAll(".tipoCard").forEach(c => c.classList.remove("tipoCard--ativo"));
 
+    arquivoSelecionado = null;
     fileInput.value = "";
     uploadArea.hidden = false;
     uploadArquivo.hidden = true;
-    btnSimplificar.disabled = true;
 
-    passoUpload.classList.add("ferramentaCard--disabled");
-    passoUpload.hidden = false;
-    passoResultado.hidden = true;
+    textoArea.value = "";
+    selecionarModo("arquivo");
 
-    btnLembrete.textContent = "Adicionar ao calendário";
-    btnLembrete.disabled = false;
+    atualizarBotaoContinuar();
 
     document.getElementById("passoTipo").scrollIntoView({ behavior: "smooth", block: "start" });
   });

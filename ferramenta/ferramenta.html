@@ -51,109 +51,210 @@
   <main>
     <section class="ferramentaHero">
       <div class="container">
-        <span class="sectionTag">FERRAMENTA</span>
-        <h1 class="ferramentaTitle">Simplifique um documento <span class="text-green">em segundos.</span></h1>
-        <p class="ferramentaSubtitle">Escolha o tipo de documento, envie um exemplo e veja a tradução em linguagem simples, junto com o que você precisa fazer a respeito.</p>
+        <h1 class="ferramentaTitle">Entenda qualquer documento <span class="text-green">em poucos segundos.</span></h1>
+        <p class="ferramentaSubtitle">O Nexum transforma documentos complexos em explicações simples, mostra o que eles significam e quais ações você precisa tomar.</p>
       </div>
     </section>
 
     <section class="container ferramentaApp">
 
-      <!-- Passo 1: escolher o tipo de documento -->
       <div class="ferramentaCard" id="passoTipo">
-        <div class="ferramentaStep">
-          <span class="stepNumber">1</span>
-          <h2 class="stepTitle">Que tipo de documento é?</h2>
-        </div>
+        <h2 class="stepTitle">Que tipo de documento é este?</h2>
+        <p class="stepSubtitle">Isso nos ajuda a entender melhor o conteúdo.</p>
+
         <div class="tipoGrid" id="tipoGrid">
-          <button class="tipoCard" data-tipo="aluguel">
-            <span class="tipoIcon">🏠</span>
-            <span class="tipoNome">Contrato de Aluguel</span>
+          <button class="tipoCard tipo--contrato" data-tipo="contrato">
+            <span class="tipoCheck">✓</span>
+            <span class="tipoIcon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 3v5h5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12h6M9 15.5h6M9 18.5h3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </span>
+            <span class="tipoNome">Contratos</span>
+            <span class="tipoDesc">Aluguel, prestação de serviços, etc.</span>
           </button>
-          <button class="tipoCard" data-tipo="laudo">
-            <span class="tipoIcon">🩺</span>
-            <span class="tipoNome">Laudo Médico</span>
+
+          <button class="tipoCard tipo--laudo" data-tipo="laudo">
+            <span class="tipoCheck">✓</span>
+            <span class="tipoIcon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M6 3v7a4 4 0 0 0 8 0V3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 3h2M12 3h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M14 10a5 5 0 0 0 5 5 3 3 0 1 0-3-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="19" cy="6" r="1.6" stroke="currentColor" stroke-width="1.3"/></svg>
+            </span>
+            <span class="tipoNome">Laudos e exames</span>
+            <span class="tipoDesc">Exames médicos, laudos clínicos, etc.</span>
           </button>
-          <button class="tipoCard" data-tipo="boleto">
-            <span class="tipoIcon">🧾</span>
-            <span class="tipoNome">Boleto / Conta</span>
+
+          <button class="tipoCard tipo--boleto" data-tipo="boleto">
+            <span class="tipoCheck">✓</span>
+            <span class="tipoIcon">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="5.5" width="19" height="13" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M2.5 9.5h19" stroke="currentColor" stroke-width="1.6"/><path d="M6 14.5h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </span>
+            <span class="tipoNome">Boletos e contas</span>
+            <span class="tipoDesc">Boletos, faturas, contas de consumo, etc.</span>
           </button>
-          <button class="tipoCard" data-tipo="edital">
-            <span class="tipoIcon">📋</span>
-            <span class="tipoNome">Edital / Comunicado</span>
+
+          <button class="tipoCard tipo--juridico" data-tipo="juridico">
+            <span class="tipoCheck">✓</span>
+            <span class="tipoIcon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M5 21h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 5.5 6 8.2M12 5.5l6 2.7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M3.2 8.2h5.6L6 12.8a2.9 2.9 0 0 1-2.8 0L3.2 8.2ZM15.2 8.2h5.6L18 12.8a2.9 2.9 0 0 1-2.8 0l-2.8-4.6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="tipoNome">Documentos jurídicos</span>
+            <span class="tipoDesc">Termos, notificações, petições, etc.</span>
+          </button>
+
+          <button class="tipoCard tipo--publico" data-tipo="publico">
+            <span class="tipoCheck">✓</span>
+            <span class="tipoIcon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 21V9l8-5 8 5v12" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 21v-6h6v6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12h.01M15 12h.01M9 9h.01M15 9h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </span>
+            <span class="tipoNome">Documentos públicos</span>
+            <span class="tipoDesc">Editais, comunicados, certidões, etc.</span>
+          </button>
+
+          <button class="tipoCard tipo--correspondencia" data-tipo="correspondencia">
+            <span class="tipoCheck">✓</span>
+            <span class="tipoIcon">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="2.5" y="5" width="19" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 6.5 12 13l9-6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="tipoNome">Correspondências</span>
+            <span class="tipoDesc">Cartas, notificações, avisos, etc.</span>
+          </button>
+
+          <button class="tipoCard tipo--outro" data-tipo="outro">
+            <span class="tipoCheck">✓</span>
+            <span class="tipoIcon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 3v5h5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="tipoNome">Outros</span>
+            <span class="tipoDesc">Outros tipos de documento</span>
           </button>
         </div>
-      </div>
 
-      <!-- Passo 2: enviar o documento -->
-      <div class="ferramentaCard ferramentaCard--disabled" id="passoUpload">
-        <div class="ferramentaStep">
-          <span class="stepNumber">2</span>
-          <h2 class="stepTitle">Envie o documento</h2>
+        <h3 class="enviarTitle">Como você quer enviar?</h3>
+
+        <div class="enviarGrid" id="enviarGrid">
+          <button class="enviarCard enviarCard--ativo" id="tabArquivo" data-modo="arquivo">
+            <span class="enviarIcon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 16V4M12 4 7.5 8.5M12 4l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="enviarTextos">
+              <span class="enviarNome">Enviar arquivo (PDF ou imagem)</span>
+              <span class="enviarDesc">Arraste e solte ou clique para selecionar</span>
+            </span>
+          </button>
+
+          <button class="enviarCard" id="tabTexto" data-modo="texto">
+            <span class="enviarIcon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 3v5h5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m9.5 17.5 1-3 5.5-5.5a1.4 1.4 0 0 1 2 2L12.5 16.5l-3 1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="enviarTextos">
+              <span class="enviarNome">Colar texto</span>
+              <span class="enviarDesc">Cole aqui o texto do documento</span>
+            </span>
+          </button>
         </div>
 
-        <label class="uploadArea" id="uploadArea">
-          <input type="file" id="fileInput" hidden />
-          <span class="uploadIcon">📄</span>
-          <span class="uploadTexto">Arraste o arquivo aqui ou <span class="uploadLink">clique para escolher</span></span>
-          <span class="uploadFormatos">PDF, JPG ou PNG</span>
-        </label>
+        <div class="enviarPainel" id="painelArquivo">
+          <label class="uploadArea" id="uploadArea">
+            <input type="file" id="fileInput" accept=".pdf,image/*" hidden />
+            <span class="uploadIcon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 16V4M12 4 7.5 8.5M12 4l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="uploadTexto">Arraste o arquivo aqui ou <span class="uploadLink">clique para escolher</span></span>
+            <span class="uploadFormatos">PDF, JPG ou PNG</span>
+          </label>
 
-        <div class="uploadArquivo" id="uploadArquivo" hidden>
-          <span class="uploadArquivoIcon">📄</span>
-          <span class="uploadArquivoNome" id="uploadArquivoNome"></span>
-          <button class="uploadArquivoRemover" id="uploadArquivoRemover" aria-label="Remover arquivo">✕</button>
-        </div>
-
-        <button class="btn btn--primary ferramentaBtn" id="btnSimplificar" disabled>Simplificar documento</button>
-        <p class="ferramentaAviso">Demonstração: nenhum arquivo é enviado a um servidor. Este protótipo usa um exemplo pronto para mostrar como o resultado funciona.</p>
-      </div>
-
-      <!-- Carregando -->
-      <div class="ferramentaCard ferramentaLoading" id="passoLoading" hidden>
-        <div class="loadingSpinner"></div>
-        <p class="loadingTexto">Traduzindo o documento para uma linguagem simples...</p>
-      </div>
-
-      <!-- Passo 3: resultado -->
-      <div class="ferramentaCard ferramentaResultado" id="passoResultado" hidden>
-        <div class="ferramentaStep">
-          <span class="stepNumber">3</span>
-          <h2 class="stepTitle">Aqui está a tradução</h2>
-        </div>
-
-        <div class="resultadoGrid">
-          <div class="resultadoBloco">
-            <div class="resultadoBlocoHeader">
-              <span class="resultadoBlocoIcon">💬</span>
-              <h3>O que esse documento significa</h3>
-            </div>
-            <ul class="resultadoLista" id="resumoLista"></ul>
+          <div class="uploadArquivo" id="uploadArquivo" hidden>
+            <span class="uploadArquivoIcon">📄</span>
+            <span class="uploadArquivoNome" id="uploadArquivoNome"></span>
+            <button class="uploadArquivoRemover" id="uploadArquivoRemover" aria-label="Remover arquivo" type="button">✕</button>
           </div>
-
-          <div class="resultadoBloco resultadoBloco--acao">
-            <div class="resultadoBlocoHeader">
-              <span class="resultadoBlocoIcon">✅</span>
-              <h3>O que você precisa fazer</h3>
-            </div>
-            <ul class="resultadoLista" id="acaoLista"></ul>
-
-            <div class="lembreteBox" id="lembreteBox" hidden>
-              <span class="lembreteIcon">🗓️</span>
-              <div>
-                <p class="lembreteTitulo">Lembrete sugerido</p>
-                <p class="lembreteTexto" id="lembreteTexto"></p>
-              </div>
-              <button class="btn btn--outline lembreteBtn" id="btnLembrete">Adicionar ao calendário</button>
-            </div>
-          </div>
         </div>
 
-        <button class="btn btn--ghost ferramentaBtn" id="btnNovoDocumento">Simplificar outro documento</button>
+        <div class="enviarPainel" id="painelTexto" hidden>
+          <textarea class="textoArea" id="textoArea" placeholder="Cole aqui o texto do documento..."></textarea>
+        </div>
+
+        <button class="btn btn--primary ferramentaBtn" id="btnContinuar" disabled>
+          Continuar
+          <svg class="btnArrow" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
 
     </section>
   </main>
+
+  <!-- Overlay de carregamento -->
+  <div class="loadingOverlay" id="loadingOverlay" hidden>
+    <div class="loadingSpinner"></div>
+    <p class="loadingTexto">Traduzindo o documento para uma linguagem simples...</p>
+  </div>
+
+  <!-- Pop-up com o resultado -->
+  <div class="modalOverlay" id="modalOverlay" hidden>
+    <div class="resultCard" id="resultCard">
+      <button class="resultClose" id="resultClose" aria-label="Fechar" type="button">✕</button>
+
+      <div class="resultHeader">
+        <h3>Documento analisado</h3>
+      </div>
+
+      <div class="resultArquivo">
+        <span class="resultArquivoIcon" id="resultArquivoIcon">PDF</span>
+        <span class="resultArquivoNome" id="resultArquivoNome">documento.pdf</span>
+        <span class="resultBadge">Simplificado</span>
+      </div>
+
+      <div class="resultLinha">
+        <span class="resultLinhaIcon resultLinhaIcon--info">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 11v5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="8" r="1" fill="currentColor"/></svg>
+        </span>
+        <div class="resultLinhaTextos">
+          <p class="resultLinhaTitulo">O que é este documento?</p>
+          <p class="resultLinhaValor" id="resultDescricao"></p>
+        </div>
+      </div>
+
+      <div class="resultLinha" id="linhaValor" hidden>
+        <span class="resultLinhaIcon resultLinhaIcon--ok">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="m8 12.5 2.5 2.5 5.5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <div class="resultLinhaTextos">
+          <p class="resultLinhaTitulo">Valor total</p>
+          <p class="resultLinhaValor" id="resultValor"></p>
+        </div>
+      </div>
+
+      <div class="resultLinha" id="linhaVencimento" hidden>
+        <span class="resultLinhaIcon resultLinhaIcon--shield">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 3 4.5 6v6c0 4.5 3.2 7 7.5 9 4.3-2 7.5-4.5 7.5-9V6L12 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </span>
+        <div class="resultLinhaTextos">
+          <p class="resultLinhaTitulo" id="resultVencimentoTitulo">Vencimento</p>
+          <p class="resultLinhaValor" id="resultVencimento"></p>
+        </div>
+      </div>
+
+      <div class="resultLinha">
+        <span class="resultLinhaIcon resultLinhaIcon--ok">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="m8 12.5 2.5 2.5 5.5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <div class="resultLinhaTextos">
+          <p class="resultLinhaTitulo">O que você precisa fazer?</p>
+          <p class="resultLinhaValor" id="resultAcao"></p>
+        </div>
+      </div>
+
+      <div class="lembreteBox" id="lembreteBox" hidden>
+        <span class="lembreteIcon">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="m7.5 12.5 3 3 6-6.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <div>
+          <p class="lembreteTitulo">Lembrete criado!</p>
+          <p class="lembreteTexto" id="lembreteTexto">Avisaremos antes do vencimento.</p>
+        </div>
+      </div>
+
+      <button class="btn btn--ghost resultNovo" id="btnNovoDocumento" type="button">Simplificar outro documento</button>
+    </div>
+  </div>
 
   <footer class="footer">
     <div class="container footer__grid">
