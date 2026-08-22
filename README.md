@@ -45,25 +45,9 @@ Mais do que um leitor ou tradutor comum, o Nexum se consolida como uma ferrament
 
 ---
 
-## 📁 Estrutura do Projeto
-
-```
-nexum/
-├── index.html          # Tela inicial
-├── style.css
-├── script.js
-├── img/                # Imagens e assets visuais
-├── ferramenta/         # Página da ferramenta de tradução
-├── planos/             # Página de planos
-├── sobrenos/           # Página "Sobre nós"
-├── suporte/            # Página de suporte
-├── login/              # Página de login
-└── cadastrar/          # Página de cadastro
-```
-
----
-
 ## 🖇️ Como Executar o Projeto
+
+Link do site funcionando:https://nexum-orcin-nine.vercel.app/
 
 ```bash
 # Clone o repositório
