@@ -49,6 +49,8 @@ Mais do que um leitor ou tradutor comum, o Nexum se consolida como uma ferrament
 
 Link do site funcionando:https://nexum-orcin-nine.vercel.app/
 
+ou
+
 ```bash
 # Clone o repositório
 git clone https://github.com/seu-usuario/nexum.git
@@ -58,8 +60,6 @@ cd nexum
 
 # Abra o index.html no navegador
 ```
-
-Como o projeto é feito em HTML, CSS e JS puros, não há dependências para instalar — basta abrir o `index.html` diretamente no navegador ou servir a pasta com uma extensão como o **Live Server** (VS Code).
 
 ---
 
